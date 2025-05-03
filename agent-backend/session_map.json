@@ -1,1 +1,44 @@
-{"DlgP966EUxXtsZFRSka0f5mOUQL2": "1851872800046841856"}
+{
+  "DlgP966EUxXtsZFRSka0f5mOUQL2": {
+    "0a79af3a": {
+      "sid": "7841660304449601536",
+      "title": "meow meow biralo eta tira au k",
+      "updatedAt": "2025-05-03T15:13:52.357368Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "meow meow biralo eta tira au kando khau",
+          "ts": "2025-05-03T15:13:52.357368Z"
+        },
+        {
+          "sender": "bot",
+          "text": "The phrase \"meow meow biralo eta tira au kando khau\" is Nepali and translates to:\n\n*   **meow meow:** the sound a cat makes\n*   **biralo:** cat\n*   **eta tira au:** come this way\n*   **kando khau:** eat thorns\n\nSo, the whole sentence roughly means: \"Meow meow, cat, come this way and eat thorns.\"\n\nIt is likely a nonsensical or teasing statement, as cats would not typically be encouraged to eat thorns.",
+          "ts": "2025-05-03T15:13:52.357368Z"
+        }
+      ]
+    },
+    "b80f69f3": {
+      "sid": "5634896487038058496",
+      "title": "shaka laka boom boom origins",
+      "updatedAt": "2025-05-03T15:21:07.439955Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "shaka laka boom boom origins",
+          "ts": "2025-05-03T15:21:07.439955Z"
+        },
+        {
+          "sender": "bot",
+          "text": "\"Shaka Laka Boom Boom\" is an Indian television series that aired on DD National from 2000 to 2004, and later on Star Plus in 2006. It revolves around a magical pencil that gives life to anything drawn with it. The show gained immense popularity among children in India and is still fondly remembered today.\n",
+          "ts": "2025-05-03T15:21:07.439955Z"
+        }
+      ]
+    },
+    "40cb260e": {
+      "sid": "6508594814747934720",
+      "title": "Untitled Chat",
+      "updatedAt": "2025-05-03T15:21:16.102Z",
+      "log": []
+    }
+  }
+}

@@ -3,16 +3,9 @@ import { spawn } from 'child_process';
 import path from 'path';
 import { adminAuth } from '@/services/firebase/admin';
 
-/* ── helpers ─────────────────────────────────────────────── */
-const now = () => new Date().toISOString().split('T')[1];          // HH:MM:SS.mmm
+/* helpers ------------------------------------------------------------- */
+const now = () => new Date().toISOString().split('T')[1];
 const log = (scope: string, msg: string) => console.log(`[${now()}] ${scope}: ${msg}`);
-
-function mkSessionId(userId: string, suffix = 'main'): string {
-  const raw = `${userId}-${suffix}`.toLowerCase().replace(/[^a-z0-9-]/g, '-');
-  const trimmed = raw.replace(/^-+|-+$/g, '');
-  return trimmed.length > 36 ? trimmed.slice(0, 36) : trimmed;     // enforce limit
-}
-/* ────────────────────────────────────────────────────────── */
 
 interface HistoryMsg { sender: 'user' | 'bot'; text: string; id: string; }
 
@@ -20,7 +13,7 @@ export async function GET(req: NextRequest) {
   const S = '/api/agent/history';
   log(S, 'GET request');
 
-  /* 1. Auth */
+  /* 1 · auth ----------------------------------------------------------- */
   const authHeader = req.headers.get('Authorization');
   if (!authHeader?.startsWith('Bearer ')) {
     log(S, '❌ Missing Authorization header');
@@ -37,14 +30,18 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  /* 2. Session‑ID */
-  const sessionId = mkSessionId(userId);
-  log(S, `Session ID="${sessionId}" (len=${sessionId.length})`);
+  /* 2 · conversationId ---------------------------------------------- */
+  const cid = req.nextUrl.searchParams.get('cid');
+  if (!cid) {
+    log(S, '❌ Missing cid param');
+    return NextResponse.json({ error: 'Missing cid' }, { status: 400 });
+  }
+  log(S, `cid="${cid}"`);
 
-  /* 3. Spawn Python */
+  /* 3 · spawn python -------------------------------------------------- */
   const pythonScript = path.resolve(process.cwd(), 'agent-backend', 'get_history.py');
   const pythonExe    = process.platform === 'win32' ? 'python' : 'python3';
-  const args         = [pythonScript, userId, sessionId];
+  const args         = [pythonScript, userId, cid];
   log(S, `Spawning: ${pythonExe} ${args.map(a => JSON.stringify(a)).join(' ')}`);
 
   return new Promise<NextResponse>((resolve) => {
@@ -65,19 +62,22 @@ export async function GET(req: NextRequest) {
 
     proc.on('close', (code) => {
       log(S, `Python exited with code ${code}`);
-      log(S, `Captured STDOUT (${out.length} chars)`);
-      log(S, `Captured STDERR (${err.length} chars)`);
-
       if (code === 0) {
         try {
           const history: HistoryMsg[] = out.trim() ? JSON.parse(out) : [];
           return resolve(NextResponse.json({ history }));
         } catch (e) {
           log(S, `❌ JSON parse error: ${(e as Error).message}`);
-          return resolve(NextResponse.json({ error: 'Parse error', raw: out }, { status: 500 }));
+          return resolve(NextResponse.json(
+            { error: 'Parse error', raw: out },
+            { status: 500 },
+          ));
         }
       }
-      return resolve(NextResponse.json({ error: 'History backend error', stderr: err }, { status: 500 }));
+      return resolve(NextResponse.json(
+        { error: 'History backend error', stderr: err },
+        { status: 500 },
+      ));
     });
   });
 }

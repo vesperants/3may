@@ -125,6 +125,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
                 boxShadow: '0 4px 16px rgba(0,0,0,0.13)',
                 padding: '4px 0',
                 zIndex: 1040,
+                color: '#000',
               }}
             >
               <button

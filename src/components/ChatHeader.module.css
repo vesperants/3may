@@ -37,7 +37,7 @@
     display: inline-flex; /* Align SVG properly */
     align-items: center;
     justify-content: center;
-    color: #333; /* Example color */
+    color: #000; /* Example color */
   }
   
   /* Styling for the main title */
@@ -47,6 +47,7 @@
     flex-grow: 1; /* Allow title to take up space if needed */
     font-size: 1.2rem;
     font-weight: 600;
+    color: #000;  
   }
   
   /* Styling for the profile button */
