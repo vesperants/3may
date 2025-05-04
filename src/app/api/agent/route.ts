@@ -46,12 +46,17 @@ export async function POST(req: NextRequest) {
 
   /* 3 · spawn python -------------------------------------------------- */
   const pythonScript = path.resolve(process.cwd(), 'agent-backend', 'gemini_agent.py');
+  const wrapperScript = path.resolve(process.cwd(), 'agent-backend', 'run_script.sh');
   const pythonExe    = process.platform === 'win32' ? 'python' : 'python3';
-  const args         = [pythonScript, userId, cid, message];
-  log(S, `Spawning: ${pythonExe} ${args.map(a => JSON.stringify(a)).join(' ')}`);
+  const args         = process.platform === 'win32' 
+                      ? [pythonScript, userId, cid, message]
+                      : ['gemini_agent.py', userId, cid, message];
+  const spawnCmd     = process.platform === 'win32' ? pythonExe : wrapperScript;
+  
+  log(S, `Spawning: ${spawnCmd} ${args.map(a => JSON.stringify(a)).join(' ')}`);
 
   return new Promise<NextResponse>((resolve) => {
-    const proc = spawn(pythonExe, args);
+    const proc = spawn(spawnCmd, args);
     let reply = '';
     let err   = '';
 

@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Najir Legal Assistant
 
-## Getting Started
+A legal assistant application that uses Google's Agent Development Kit (ADK) to provide information about Nepali Supreme Court cases. The application uses a root agent to route queries to specialized sub-agents based on the type of query.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Root Agent**: Routes queries to specialized sub-agents based on the user's input
+- **Specialized Agents**:
+  - **Najir Expert Agent**: Answers questions about specific Nepali Supreme Court cases
+  - **Case Search Agent**: Searches for legal cases related to keywords or topics
+  - **Greeting Agent**: Handles greetings and introductions
+  - **Farewell Agent**: Handles goodbyes and closing conversations
+- **Firebase Authentication**: Secure user authentication
+- **Session Management**: Maintains conversation history across sessions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Node.js (v18 or higher)
+- Python 3.10 or higher
+- Google Cloud account with Vertex AI enabled
+- Firebase project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Setup
 
-## Learn More
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/najir-legal-assistant.git
+   cd najir-legal-assistant
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Create a `.env` file in the root directory with the following variables:
+   ```
+   # Google Cloud Configuration
+   GOOGLE_CLOUD_PROJECT_ID=your-project-id
+   GOOGLE_CLOUD_LOCATION=us-central1
+   VERTEX_SESSION_APP_NAME=your-vertex-session-app-name
+   GOOGLE_API_KEY=your-google-api-key
+   
+   # Firebase Configuration (for the frontend)
+   NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-firebase-storage-bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-firebase-messaging-sender-id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your-firebase-app-id
+   
+   # Firebase Admin SDK (for the backend)
+   FIREBASE_SERVICE_ACCOUNT=your-firebase-service-account-json
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Backend Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Navigate to the backend directory:
+   ```bash
+   cd agent-backend
+   ```
 
-## Deploy on Vercel
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Install the required Python packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Start the backend server:
+   ```bash
+   uvicorn app:app --reload
+   ```
+   The backend server will run at http://127.0.0.1:8000.
+
+## Frontend Setup
+
+1. Navigate back to the root directory:
+   ```bash
+   cd ..
+   ```
+
+2. Install the required Node.js packages:
+   ```bash
+   npm install
+   ```
+
+3. Start the frontend development server:
+   ```bash
+   npm run dev
+   ```
+   The frontend will be available at http://localhost:3000.
+
+## Using the Application
+
+1. Open http://localhost:3000 in your web browser
+2. Log in with your Firebase credentials
+3. Start a conversation with the agent
+4. Try different types of queries:
+   - **Case Search**: "Find cases related to property disputes"
+   - **Specific Case Questions**: "What is case 7821 about?"
+   - **Greetings**: "Hello", "Hi"
+   - **Farewells**: "Goodbye", "Bye"
+
+## Agent Architecture
+
+The application uses a root agent to route queries to specialized sub-agents:
+
+1. **Root Agent**: Analyzes the user's query and decides which specialized agent should handle it
+2. **Najir Expert Agent**: Answers questions about specific case numbers
+3. **Case Search Agent**: Searches for cases related to keywords or topics
+4. **Greeting Agent**: Handles greetings and introductions
+5. **Farewell Agent**: Handles goodbyes and closing conversations
+
+## Troubleshooting
+
+- **Missing Dependencies**: If you encounter import errors, make sure all required packages are installed
+- **Session Management**: Ensure that session IDs are valid to avoid `INVALID_ARGUMENT` errors
+- **API Keys**: Verify that all API keys and environment variables are correctly set
+- **Firebase Authentication**: Check Firebase console for authentication issues
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.

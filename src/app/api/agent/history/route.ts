@@ -40,12 +40,17 @@ export async function GET(req: NextRequest) {
 
   /* 3 · spawn python -------------------------------------------------- */
   const pythonScript = path.resolve(process.cwd(), 'agent-backend', 'get_history.py');
+  const wrapperScript = path.resolve(process.cwd(), 'agent-backend', 'run_script.sh');
   const pythonExe    = process.platform === 'win32' ? 'python' : 'python3';
-  const args         = [pythonScript, userId, cid];
-  log(S, `Spawning: ${pythonExe} ${args.map(a => JSON.stringify(a)).join(' ')}`);
+  const args         = process.platform === 'win32' 
+                      ? [pythonScript, userId, cid]
+                      : ['get_history.py', userId, cid];
+  const spawnCmd     = process.platform === 'win32' ? pythonExe : wrapperScript;
+  
+  log(S, `Spawning: ${spawnCmd} ${args.map(a => JSON.stringify(a)).join(' ')}`);
 
   return new Promise<NextResponse>((resolve) => {
-    const proc = spawn(pythonExe, args);
+    const proc = spawn(spawnCmd, args);
     let out = '';
     let err = '';
 

@@ -40,5 +40,140 @@
       "updatedAt": "2025-05-03T15:21:16.102Z",
       "log": []
     }
+  },
+  "D2qIlI9bfsU72C9phVy7krxc1oj2": {
+    "bf0afb21": {
+      "sid": "7028760571709227008",
+      "title": "Untitled Chat",
+      "updatedAt": "2025-05-04T13:36:09.478Z",
+      "log": []
+    },
+    "bc4edd32": {
+      "sid": "3320046278569623552",
+      "title": "hi",
+      "updatedAt": "2025-05-04T14:33:45.385998Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-04T13:50:06.676372Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hi there! How can I help you today?\n",
+          "ts": "2025-05-04T13:50:06.676372Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me some cases related to sagar thapa",
+          "ts": "2025-05-04T14:04:21.710778Z"
+        },
+        {
+          "sender": "bot",
+          "text": "The user is asking to search for legal cases related to \"sagar thapa\".\n",
+          "ts": "2025-05-04T14:04:21.710778Z"
+        },
+        {
+          "sender": "user",
+          "text": "find me cases related to sagar thapa",
+          "ts": "2025-05-04T14:10:52.828139Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I'd be happy to search for cases related to 'find me cases related to sagar thapa', but the case search functionality is currently unavailable. Please try a different query or check back later.",
+          "ts": "2025-05-04T14:10:52.828139Z"
+        },
+        {
+          "sender": "user",
+          "text": "find me cases related to sagar thapa",
+          "ts": "2025-05-04T14:14:50.356271Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the cases related to sagar thapa. Do you want me to find more cases?\n",
+          "ts": "2025-05-04T14:14:50.356271Z"
+        },
+        {
+          "sender": "user",
+          "text": "can you tell me what the case 7821 is about",
+          "ts": "2025-05-04T14:15:24.803892Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I am sorry, I cannot fulfill this request. The case search tool does not have the ability to provide details about specific cases. It can only search for cases based on a query.\n",
+          "ts": "2025-05-04T14:15:24.803892Z"
+        },
+        {
+          "sender": "user",
+          "text": "What is case 7821 about?",
+          "ts": "2025-05-04T14:20:46.177320Z"
+        },
+        {
+          "sender": "bot",
+          "text": "The case with number 7821 is about the cancellation of an auction registration.\n",
+          "ts": "2025-05-04T14:20:46.177320Z"
+        },
+        {
+          "sender": "user",
+          "text": "find me cases related to sagar thapa",
+          "ts": "2025-05-04T14:21:51.013991Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Okay, I have found more cases related to sagar thapa.\n",
+          "ts": "2025-05-04T14:21:51.013991Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-04T14:24:46.168949Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hello, User! \ud83d\udc4b\n",
+          "ts": "2025-05-04T14:24:46.168949Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to sagar thapa",
+          "ts": "2025-05-04T14:30:20.694348Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I apologize, but I'm having trouble processing your request. Please try again.",
+          "ts": "2025-05-04T14:30:20.694348Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to sagar thapa",
+          "ts": "2025-05-04T14:30:37.822280Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I apologize, but I'm having trouble processing your request. Please try again.",
+          "ts": "2025-05-04T14:30:37.822280Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to sagar thapa",
+          "ts": "2025-05-04T14:33:01.592931Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the cases related to your search:\n1. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0968\u0969 - \u0930\u093e\u091c\u094d\u092f \u0935\u093f\u0930\u0942\u0926\u094d\u0927\u0915\u094b \u0905\u092a\u0930\u093e\u0927\n2. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0968\u0968\u096c - \u0915\u0930\u094d\u0924\u0935\u094d\u092f\u091c\u094d\u092f\u093e\u0928 \u0964\n3. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096b\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\u092f\u0941\u0915\u094d\u0924 \u092a\u0930\u092e\u093e\u0926\u0947\u0936\u0915\u094b \u0906\u0926\u0947\u0936 \u091c\u093e\u0930\u0940 \u0917\u0930\u093f\u092a\u093e\u090a\u0901\n4. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0968\u096e - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928 \u0964\n5. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096c\u096e\u096b - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n6. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0969\u096f - \u0924\u093e\u0932\u0941\u0915\u0940\n7. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0969\u0966\u0967 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\n8. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u096c\u0966 - \u092a\u0930\u092e\u093e\u0926\u0947\u0936\u0938\u092e\u0947\u0924\n9. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u096c\u096a - \u091c\u093e\u0932\u0938\u093e\u091c\u0940 \u0964\n10. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0968\u0967\u0967 - \u0917\u0948\u0902\u0921\u093e\u0915\u094b \u0916\u093e\u0917 \u0913\u0938\u093e\u0930 \u092a\u0938\u093e\u0930\nWould you like to search for more cases?",
+          "ts": "2025-05-04T14:33:01.592931Z"
+        },
+        {
+          "sender": "user",
+          "text": "tell me about case number 7850",
+          "ts": "2025-05-04T14:33:45.385998Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Based on the title \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096b\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\u092f\u0941\u0915\u094d\u0924 \u092a\u0930\u092e\u093e\u0926\u0947\u0936\u0915\u094b \u0906\u0926\u0947\u0936 \u091c\u093e\u0930\u0940 \u0917\u0930\u093f\u092a\u093e\u090a\u0901\" (Nirnaya No. 7850 - Utprekshanayukta Paramadeshko Aadesh Jaari Garipau), this case involves a request for a writ of Utprekshanayukta Paramadesh, a combined writ seeking both Utprekshan (Certiorari) to quash a decision and Paramadesh (Mandamus) to compel a public official to perform a duty. The petitioners are asking the court to issue an order granting this combined writ.\n",
+          "ts": "2025-05-04T14:33:45.385998Z"
+        }
+      ]
+    }
   }
 }

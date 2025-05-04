@@ -21,13 +21,23 @@ from google.adk.sessions import VertexAiSessionService
 from google.genai        import types
 from google.genai.errors import ClientError
 
+# Import the root agent
+try:
+    from root_agent import route_to_agent
+    USE_ROOT_AGENT = True
+    log = logging.getLogger(__name__)
+    log.info("✅ Using root agent for routing")
+except ImportError as e:
+    USE_ROOT_AGENT = False
+    log = logging.getLogger(__name__)
+    log.warning(f"❌ Failed to import root agent: {e}. Using single agent instead.")
+
 # ─── logging ─────────────────────────────────────────────────────────
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     stream=sys.stderr,
 )
-log = logging.getLogger(__name__)
 # ─────────────────────────────────────────────────────────────────────
 
 load_dotenv()
@@ -39,6 +49,7 @@ if not PROJ or not APP:
     print("❌ env error")
     sys.exit(1)
 
+# Create a fallback single agent if root agent is not available
 agent = Agent(
     model="gemini-2.0-flash",
     name="conversational_agent",
@@ -106,17 +117,39 @@ def chat(uid: str, cid: str, msg: str) -> str:
     sid = cached_session(uid, cid)
 
     # ---- send to agent ----------------------------------------------------
-    content = types.Content(role="user", parts=[types.Part(text=msg)])
     reply = "Agent did not reply."
-    for ev in runner.run(user_id=uid, session_id=sid, new_message=content):
-        if (
-            ev.is_final_response()
-            and ev.author == agent.name
-            and ev.content
-            and ev.content.parts
-        ):
-            reply = ev.content.parts[0].text
-            break
+    
+    if USE_ROOT_AGENT:
+        try:
+            # Use the root agent for routing
+            reply = route_to_agent(user_id=uid, session_id=sid, message=msg)
+            log.info(f"Root agent response: {reply[:50]}...")
+        except Exception as e:
+            log.exception(f"Error using root agent: {e}")
+            log.info("Falling back to single agent")
+            # Fall back to the single agent if there's an error
+            content = types.Content(role="user", parts=[types.Part(text=msg)])
+            for ev in runner.run(user_id=uid, session_id=sid, new_message=content):
+                if (
+                    ev.is_final_response()
+                    and ev.author == agent.name
+                    and ev.content
+                    and ev.content.parts
+                ):
+                    reply = ev.content.parts[0].text
+                    break
+    else:
+        # Use the single agent
+        content = types.Content(role="user", parts=[types.Part(text=msg)])
+        for ev in runner.run(user_id=uid, session_id=sid, new_message=content):
+            if (
+                ev.is_final_response()
+                and ev.author == agent.name
+                and ev.content
+                and ev.content.parts
+            ):
+                reply = ev.content.parts[0].text
+                break
 
     # ---- update metadata & local log -------------------------------------
     now_iso = datetime.datetime.utcnow().isoformat() + "Z"
