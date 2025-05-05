@@ -123,7 +123,41 @@ def chat(uid: str, cid: str, msg: str) -> str:
         try:
             # Use the root agent for routing
             reply = route_to_agent(user_id=uid, session_id=sid, message=msg)
-            log.info(f"Root agent response: {reply[:50]}...")
+            log.info(f"Root agent response (first 100 chars): {reply[:100]}...")
+            
+            # Handle structured responses (especially case search results)
+            try:
+                # Attempt to parse the reply as JSON
+                json_data = json.loads(reply)
+                if isinstance(json_data, dict) and 'type' in json_data:
+                    log.info(f"✅ Received structured response with type: {json_data['type']}")
+                    
+                    # Update the local log with the structured response
+                    now_iso = datetime.datetime.utcnow().isoformat() + "Z"
+                    log_list = entry.get("log", [])
+                    log_list.append({"sender": "user", "text": msg, "ts": now_iso})
+                    log_list.append({"sender": "bot", "text": reply, "structured": True, "ts": now_iso})
+                    entry["log"] = log_list[-200:]  # keep last 200 turns
+                    entry["updatedAt"] = now_iso
+                    
+                    # Update title if needed
+                    if not entry.get("title") or entry["title"].startswith(("Untitled", "New Chat")):
+                        entry["title"] = msg[:30]
+                    
+                    user_cache[cid] = entry
+                    cache[uid] = user_cache
+                    save_map(cache)
+                    
+                    # Return the JSON as is - it will be parsed and rendered correctly by the frontend
+                    return reply
+            except json.JSONDecodeError:
+                # Not a structured JSON response, continue with normal processing
+                log.info("Response is not a valid JSON, handling as regular text")
+                
+            # If we're here, it's not a structured JSON response or there was an error
+            # Check if reply contains case search results in text (fallback handling)
+            if "case search results" in reply.lower() or "निर्णय नं" in reply:
+                log.info("Detected case search results in text response")
         except Exception as e:
             log.exception(f"Error using root agent: {e}")
             log.info("Falling back to single agent")
@@ -155,7 +189,22 @@ def chat(uid: str, cid: str, msg: str) -> str:
     now_iso = datetime.datetime.utcnow().isoformat() + "Z"
     log_list = entry.get("log", [])
     log_list.append({"sender": "user", "text": msg, "ts": now_iso})
-    log_list.append({"sender": "bot", "text": reply, "ts": now_iso})
+    
+    # Check if the reply is a structured JSON string with a 'type' field
+    try:
+        # Try to parse the reply as JSON
+        json_reply = json.loads(reply)
+        if isinstance(json_reply, dict) and 'type' in json_reply:
+            # It's a structured response, preserve the JSON format
+            log_list.append({"sender": "bot", "text": reply, "structured": True, "ts": now_iso})
+            log.info(f"Detected structured response with type: {json_reply['type']}")
+        else:
+            # It's JSON but not our structured format, treat as regular text
+            log_list.append({"sender": "bot", "text": reply, "ts": now_iso})
+    except json.JSONDecodeError:
+        # Not JSON, treat as regular text
+        log_list.append({"sender": "bot", "text": reply, "ts": now_iso})
+    
     entry["log"] = log_list[-200:]  # keep last 200 turns
     entry["updatedAt"] = now_iso
 

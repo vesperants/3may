@@ -1,0 +1,191 @@
+.container {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 14px;
+  color: #333;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin: 8px 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 12px;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #e0e0e0;
+  font-weight: 500;
+  color: #444;
+}
+
+.header span {
+  margin-bottom: 8px;
+}
+
+.searchContainer {
+  width: 100%;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  background-color: white;
+}
+
+.searchInput:focus {
+  border-color: #4a7aff;
+  box-shadow: 0 0 0 2px rgba(74, 122, 255, 0.1);
+}
+
+.searchInput::placeholder {
+  color: #aaa;
+}
+
+.filterInfo {
+  font-size: 12px;
+  color: #777;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.noCasesFound {
+  padding: 20px 12px;
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+.caseList {
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+  background-color: white;
+  /* Prevent scroll propagation */
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+/* Style for webkit scrollbars */
+.caseList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.caseList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.caseList::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.caseList::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.caseItem {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.15s ease;
+}
+
+.caseItem:hover {
+  background-color: #f9f9f9;
+}
+
+.caseItem:last-child {
+  border-bottom: none;
+}
+
+.caseInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0; /* Ensure text truncation works */
+}
+
+.caseId {
+  font-weight: 500;
+  color: #4a7aff;
+  margin-bottom: 2px;
+  font-size: 0.9em;
+}
+
+.caseTitle {
+  line-height: 1.4;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+.checkbox {
+  margin-right: 12px;
+  width: 16px;
+  height: 16px;
+  accent-color: #4a7aff;
+  margin-top: 3px; /* Align with first line of text */
+}
+
+.selectedCountContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #eef3ff;
+  color: #4a7aff;
+  font-weight: 500;
+  border-top: 1px solid #e0e0e0;
+}
+
+.selectedCount {
+  /* No padding or background since that's handled by container */
+  color: #4a7aff;
+  font-weight: 500;
+}
+
+.submitButton {
+  background-color: #4a7aff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover {
+  background-color: #3a6ae8;
+}
+
+@media (max-width: 640px) {
+  .container {
+    font-size: 13px;
+  }
+  
+  .caseList {
+    max-height: 200px;
+  }
+  
+  .searchInput {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+} 

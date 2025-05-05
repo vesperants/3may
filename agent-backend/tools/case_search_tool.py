@@ -1,29 +1,31 @@
 import os
-import json
-from typing import Optional, Dict, Any
+import logging
+from typing import Optional, Dict, Any, List
 from google.api_core.client_options import ClientOptions
 from google.cloud import discoveryengine_v1
-from google.protobuf.json_format import MessageToDict
+
+# Set up logger
+logger = logging.getLogger(__name__)
 
 # Environment variables for configuration
 PROJECT_ID = os.getenv("GOOGLE_PROJECT", "vesp-a581d")
 LOCATION = os.getenv("LOCATION", "global")
 DATASTORE_ID = os.getenv("DATASTORE_ID", "najir-datastore_1745733081075")
 
-# Add debug print for configuration
-print(f"[DEBUG] Using PROJECT_ID: {PROJECT_ID}, LOCATION: {LOCATION}, DATASTORE_ID: {DATASTORE_ID}")
+# Add debug log for configuration
+logger.debug(f"Using PROJECT_ID: {PROJECT_ID}, LOCATION: {LOCATION}, DATASTORE_ID: {DATASTORE_ID}")
 
-def case_search_tool(query: str, page_token: Optional[str] = None) -> str:
+def case_search_tool(query: str, page_token: Optional[str] = None) -> Dict[str, Any]:
     """
     Search for relevant Supreme Court cases using Vertex AI Discovery Engine.
     Args:
         query (str): The user's search query (e.g., party name, topic).
         page_token (str, optional): Token for pagination (if needed).
     Returns:
-        str: A JSON string containing the search results and next page token (if any).
+        dict: A dictionary containing the search results and next page token (if any).
     """
-    # Debug print for tracking
-    print(f"[DEBUG] case_search_tool called with query: '{query}', page_token: '{page_token}'")
+    # Debug log for tracking
+    logger.debug(f"case_search_tool called with query: '{query}', page_token: '{page_token}'")
     
     # Build the API endpoint and client options
     api_endpoint = f"{LOCATION}-discoveryengine.googleapis.com" if LOCATION != "global" else None
@@ -39,49 +41,62 @@ def case_search_tool(query: str, page_token: Optional[str] = None) -> str:
     request = discoveryengine_v1.SearchRequest(
         serving_config=serving_config,
         query=query,
-        page_size=10,
+        page_size=10,  # Reduced page size for better performance
         **({"page_token": page_token} if page_token else {})
     )
 
     # Perform the search and collect results
-    results = []
+    cases = []
     next_page_token = None
+    
     try:
         response = client.search(request)
         
         # Process search results
         for result in response.results:
-            # Extract just the title for simplicity and reliability
+            # Extract case information
             if hasattr(result.document, 'struct_data') and result.document.struct_data:
-                title = result.document.struct_data.get('title', 'No title available')
-                results.append({"title": title})
+                struct_data = result.document.struct_data
+                
+                # Extract relevant fields
+                title = struct_data.get('title', 'No title available')
+                case_id = struct_data.get('case_id', '')
+                
+                # If case_id is missing, try to extract from title
+                if not case_id and title and 'निर्णय नं.' in title:
+                    # Try to extract case ID from title
+                    import re
+                    match = re.search(r'निर्णय\s+नं\.\s+(\S+)', title)
+                    if match:
+                        case_id = match.group(1)
+                
+                # Create a case object with minimal required fields
+                case = {
+                    "id": case_id,
+                    "title": title
+                }
+                cases.append(case)
         
         # Get next page token if available
         next_page_token = response.next_page_token if hasattr(response, 'next_page_token') else None
         
-        # Print debug info
-        print(f"[DEBUG] Results found: {len(results)}")
+        # Log debug info
+        logger.debug(f"Cases found: {len(cases)}")
         
-        # Create response object with just the essential data
-        response_data = {
+        # Return a clean dictionary structure that the frontend expects
+        return {
             "status": "success",
-            "count": len(results),
-            "results": results,
-            "next_page_token": next_page_token
+            "cases": cases,
+            "totalCount": len(cases),
+            "nextPageToken": next_page_token
         }
-        
-        # Convert to JSON and return
-        json_response = json.dumps(response_data, ensure_ascii=False)
-        return json_response
 
     except Exception as e:
-        print(f"[DEBUG] Error in case_search_tool: {e}")
-        # Return error info as JSON string
-        error_response = {
+        logger.error(f"Error in case_search_tool: {e}")
+        return {
             "status": "error",
             "message": str(e),
-            "results": []
+            "cases": []
         }
-        return json.dumps(error_response, ensure_ascii=False)
 
-# This tool can be used by a specialized agent to handle case search queries.
+# This tool can be used directly by the root agent

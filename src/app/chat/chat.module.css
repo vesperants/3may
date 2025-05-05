@@ -127,6 +127,8 @@
     background-color: #f5f5f5;
     color: #222;
     align-self: flex-start;
+    max-width: 80%;
+    width: auto;  /* Allow content to determine width */
   }
   
   /* --- Markdown/Code Fix --- */

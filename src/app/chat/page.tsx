@@ -9,16 +9,24 @@ import React, {
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 
-import ChatHeader    from '@/components/ChatHeader';
+import ChatHeader from '@/components/ChatHeader';
 import ChatInputArea from '@/components/ChatInputArea';
-import ChatShelf     from '@/components/ChatShelf';
+import ChatShelf from '@/components/ChatShelf';
+import ChatMessageList from '@/components/ChatMessageList';
+import { Case } from '@/components/CaseResultList';
+import { formatSelectedCasesQuery } from '@/services/caseParser';
 
 /* ---------- types ---------- */
 interface Message {
   sender: 'user' | 'bot';
   text: string;
   id: string;
+  timestamp: Date;
+  cases?: Case[];
+  selectedCases?: Case[];
+  wordsBatches?: string[][];
 }
+
 interface ConversationMeta {
   id: string;
   title: string;
@@ -27,7 +35,7 @@ interface ConversationMeta {
 
 /* ------------------------------------------------------------------ */
 export default function ChatPage() {
-  const { user, loading: authLoading, signOut } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const router = useRouter();
 
   /* state */
@@ -41,38 +49,79 @@ export default function ChatPage() {
   const [error, setError] = useState<string | null>(null);
   const [isShelfOpen, setShelfOpen] = useState(false);
   const [inputMsg, setInputMsg] = useState('');
+  
+  // Debug state to track loading process
+  const [loadingState, setLoadingState] = useState('initializing');
+
+  const [selectedCases, setSelectedCases] = useState<{messageId: string, cases: Case[]} | null>(null);
 
   /* refs */
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const bottomRef   = useRef<HTMLDivElement>(null);
-  const convLoaded  = useRef(false);
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const convLoaded = useRef(false);
+  const stopTypingRef = useRef(false);
 
   /* helper fetch */
-  const authFetch = async (url: string, init: RequestInit = {}) => {
-    if (!user) throw new Error('no user');
-    const token = await user.getIdToken();
-    return fetch(url, {
-      ...init,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-        ...(init.headers || {}),
-      },
-    });
-  };
+  const authFetch = useCallback(async (url: string, init: RequestInit = {}) => {
+    if (!user) {
+      console.error('authFetch called with no user');
+      throw new Error('Authentication required');
+    }
+    
+    try {
+      console.log(`authFetch: Fetching ${url}`);
+      const token = await user.getIdToken();
+      
+      if (!token) {
+        console.error('Failed to get ID token');
+        throw new Error('Authentication token error');
+      }
+      
+      return fetch(url, {
+        ...init,
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+          ...(init.headers || {}),
+        },
+      });
+    } catch (error) {
+      console.error('authFetch error:', error);
+      throw error;
+    }
+  }, [user]);
 
   /* load conversations once */
   const loadConversations = useCallback(async () => {
     if (!user || convLoaded.current) return;
-    const res = await authFetch('/api/agent/conversations');
-    if (!res.ok) { setError('conv list error'); return; }
-    const list: ConversationMeta[] = (await res.json()).conversations || [];
-    setConversationList(list);
+    
+    setLoadingState('loading-conversations');
+    try {
+      const res = await authFetch('/api/agent/conversations');
+      if (!res.ok) { 
+        setError('conv list error'); 
+        setLoadingState('error-loading-conversations');
+        return; 
+      }
+      
+      const list: ConversationMeta[] = (await res.json()).conversations || [];
+      setConversationList(list);
 
-    if (!list.length) await createConversation();
-    else setActiveCid(prev => prev ?? list[0].id);
+      if (!list.length) {
+        setLoadingState('creating-conversation');
+        await createConversation();
+      }
+      else {
+        setActiveCid(prev => prev ?? list[0].id);
+      }
 
-    convLoaded.current = true;
+      convLoaded.current = true;
+      setLoadingState('conversations-loaded');
+    } catch (err) {
+      console.error('Error loading conversations:', err);
+      setError('Failed to load conversations');
+      setLoadingState('error-loading-conversations');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
@@ -98,17 +147,47 @@ export default function ChatPage() {
 
   /* fetch history */
   const fetchHistory = useCallback(async () => {
-    if (!user || !activeCid || historyLoading) return;
+    if (!user || !activeCid) {
+      console.log("fetchHistory: Missing user or activeCid");
+      return;
+    }
+    
+    if (historyLoading) {
+      console.log("fetchHistory: Already loading history");
+      return;
+    }
+    
+    console.log(`fetchHistory: Starting to fetch history for cid=${activeCid}`);
     setHistoryLoading(true);
     setMessages([]);
+    setLoadingState('loading-history');
+    
     try {
       const res = await authFetch(`/api/agent/history?cid=${encodeURIComponent(activeCid)}`);
-      if (!res.ok) throw new Error('history error');
+      
+      if (!res.ok) {
+        throw new Error(`History request failed with status: ${res.status}`);
+      }
+      
       const data = await res.json();
-      setMessages(data.history || []);
-    } catch (e: any) { setError(e.message); }
-    finally { setHistoryLoading(false); }
-  }, [user, activeCid]);
+      console.log(`fetchHistory: Received ${data.history?.length || 0} messages`);
+      
+      // Convert history items to Message format with proper timestamps
+      const history = (data.history || []).map((item: { sender: string; text: string; id: string; timestamp?: string }) => ({
+        ...item,
+        timestamp: item.timestamp ? new Date(item.timestamp) : new Date()
+      }));
+      
+      setMessages(history);
+      setLoadingState('history-loaded');
+    } catch (e) { 
+      console.error("fetchHistory error:", e);
+      setError(e instanceof Error ? e.message : 'Failed to load conversation history'); 
+      setLoadingState('history-error');
+    } finally { 
+      setHistoryLoading(false);
+    }
+  }, [user, activeCid, authFetch]);
 
   /* send user message */
   const handleSendMessage = async (txt: string) => {
@@ -116,12 +195,13 @@ export default function ChatPage() {
 
     const clean = txt.trim();
     setIsSending(true); setError(null);
+    const now = new Date();
 
     const thinkingId = `thinking-${Date.now()}`;
     setMessages(p => [
       ...p,
-      { sender: 'user', text: clean, id: `u-${Date.now()}` },
-      { sender: 'bot',  text: '...', id: thinkingId },
+      { sender: 'user', text: clean, id: `u-${Date.now()}`, timestamp: now },
+      { sender: 'bot',  text: '...', id: thinkingId, timestamp: now },
     ]);
     setInputMsg('');
 
@@ -134,9 +214,26 @@ export default function ChatPage() {
 
       if (!res.ok) throw new Error('agent error');
       const data = await res.json();
+      
+      // Log the raw response for debugging
+      console.log('==== BOT RESPONSE START ====');
+      console.log('Response type:', typeof data.reply);
+      console.log('Response raw content:', data.reply);
+      try {
+        // Check if it's valid JSON
+        if (typeof data.reply === 'string' && (data.reply.startsWith('{') || data.reply.includes('"type":'))) {
+          console.log('Attempting to parse as JSON...');
+          const jsonData = JSON.parse(data.reply);
+          console.log('Successfully parsed as JSON:', jsonData);
+        }
+      } catch (error) {
+        console.log('Not valid JSON:', error);
+      }
+      console.log('==== BOT RESPONSE END ====');
+      
       setMessages(p => [
         ...p,
-        { sender: 'bot', text: data.reply, id: `b-${Date.now()}` },
+        { sender: 'bot', text: data.reply, id: `b-${Date.now()}`, timestamp: new Date() },
       ]);
 
       /* refresh conversation title locally if still placeholder */
@@ -149,7 +246,9 @@ export default function ChatPage() {
         ),
       );
 
-    } catch (e: any) { setError(e.message); }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Unknown error');
+    }
     finally { setIsSending(false); textareaRef.current?.focus(); }
   };
 
@@ -158,26 +257,114 @@ export default function ChatPage() {
     if (!historyLoading) bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, historyLoading]);
 
+  /* Helper for debugging */
+  useEffect(() => {
+    console.log(`Chat page loading state: ${loadingState}`);
+  }, [loadingState]);
+
   /* effects */
-  useEffect(() => { if (!authLoading && user) loadConversations(); },
-    [authLoading, user, loadConversations]);
+  useEffect(() => { 
+    if (authLoading) {
+      setLoadingState('auth-loading');
+      return;
+    }
+    
+    if (!user) {
+      setLoadingState('no-user');
+      router.replace('/login');
+      return;
+    }
+    
+    if (!user.emailVerified) {
+      setLoadingState('email-not-verified');
+      router.replace('/login');
+      return;
+    }
+    
+    setLoadingState('auth-complete');
+    loadConversations();
+  }, [authLoading, user, router, loadConversations]);
 
-  useEffect(() => { if (activeCid) fetchHistory(); }, [activeCid, fetchHistory]);
+  /* fetch history - only when we have an active conversation */
+  useEffect(() => { 
+    if (activeCid) {
+      setLoadingState('fetching-history');
+      fetchHistory();
+    }
+  }, [activeCid, fetchHistory]);
 
-  useEffect(() => { if (!authLoading && (!user || !user.emailVerified)) router.replace('/login'); },
-    [authLoading, user, router]);
+  /* Create timeout to prevent infinite loading */
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (historyLoading) {
+        console.log('History loading taking too long, forcing state to complete');
+        setHistoryLoading(false);
+        setLoadingState('history-timeout');
+      }
+    }, 10000); // 10 second timeout
+    
+    return () => clearTimeout(timeoutId);
+  }, [historyLoading]);
 
+  /* Handle case selection */
+  const handleCaseSelection = (messageId: string, cases: Case[]) => {
+    if (cases.length > 0) {
+      setSelectedCases({ messageId, cases });
+    } else {
+      setSelectedCases(null);
+    }
+  };
+
+  /* Create a query from selected cases */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const submitSelectedCasesQuery = () => {
+    if (selectedCases?.cases.length) {
+      const query = formatSelectedCasesQuery(selectedCases.cases);
+      if (query) {
+        handleSendMessage(query);
+        setSelectedCases(null);
+      }
+    }
+  };
+
+  /* ---------------------------- UI --------------------------- */
+  
+  // Show different loading states
   if (authLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-100 text-gray-600">
-        Loading…
+        Authenticating...
+      </div>
+    );
+  }
+  
+  if (!user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gray-100 text-gray-600">
+        Please log in to continue
+      </div>
+    );
+  }
+  
+  if (historyLoading && loadingState === 'loading-history') {
+    return (
+      <div className="flex min-h-screen flex-col bg-white">
+        <div className="relative">
+          <ChatHeader title="Stirsat">
+            {/* Optional children content */}
+          </ChatHeader>
+        </div>
+        
+        <div className="flex flex-1 items-center justify-center">
+          <div className="text-center p-4">
+            <p className="text-gray-600 mb-2">Loading conversation history...</p>
+            <div className="w-8 h-8 border-t-2 border-blue-500 rounded-full animate-spin mx-auto"></div>
+          </div>
+        </div>
       </div>
     );
   }
 
-  const inputDisabled = isSending || !activeCid;
-
-  /* ---------------------------- UI --------------------------- */
   return (
     <div className="flex min-h-screen flex-col bg-white">
       {/* header */}
@@ -204,47 +391,62 @@ export default function ChatPage() {
         </button>
 
         <ChatHeader
-          title="Stirsat"                    
-          userEmail={user?.email || ''}
-          onSignOut={signOut}
-          onProfileClick={() => {}}
-          onEditProfile={() => {}}
-          isShelfOpen={isShelfOpen}
-          avatarButtonRef={React.createRef<HTMLButtonElement>()}
-        />
+          title="Stirsat"
+        >
+          {/* Optional children content */}
+        </ChatHeader>
       </div>
 
       {error && (
-        <div className="bg-red-100 p-2 text-center text-sm text-red-700">{error}</div>
+        <div className="bg-red-100 p-2 text-center text-sm text-red-700">
+          {error}
+          <button 
+            className="ml-2 underline text-red-800"
+            onClick={() => {
+              setError(null);
+              if (activeCid) fetchHistory();
+            }}
+          >
+            Retry
+          </button>
+        </div>
+      )}
+
+      {/* Debug info in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="bg-yellow-50 p-1 text-xs text-gray-500 text-center">
+          State: {loadingState} | History loading: {historyLoading ? 'true' : 'false'} | Messages: {messages.length}
+        </div>
       )}
 
       {/* messages */}
-      <div className="flex flex-1 flex-col items-center justify-end px-2">
-        <div className="mx-auto flex w-full max-w-[920px] flex-1 flex-col">
+      <div className="flex flex-1 flex-col items-center justify-end px-2 relative">
+        <div className="mx-auto w-full max-w-[920px] flex-1 flex flex-col h-full">
           <div className="flex-1 overflow-y-auto py-4 pb-[100px]">
-            {historyLoading && (
-              <div className="text-center text-gray-500">Loading history…</div>
+            {activeCid && !historyLoading && messages.length === 0 && (
+              <div className="text-center text-gray-500 py-8">
+                No messages yet. Start a conversation!
+              </div>
             )}
-
-            {!historyLoading &&
-              messages.map(m => (
-                <div
-                  key={m.id}
-                  className={`mb-2 flex ${
-                    m.sender === 'user' ? 'justify-end' : 'justify-start'
-                  }`}
-                >
-                  <span
-                    className={`inline-block max-w-[80%] whitespace-pre-wrap break-words rounded-lg px-4 py-2 shadow-sm ${
-                      m.sender === 'user'
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-gray-200 text-gray-900'
-                    }`}
-                  >
-                    {m.id.startsWith('thinking-') ? '…' : m.text}
-                  </span>
-                </div>
-              ))}
+            
+            {!historyLoading && messages.length > 0 && (
+              <ChatMessageList
+                chatHistory={messages}
+                isBotReplying={isSending}
+                stopTypingRef={stopTypingRef}
+                chatContainerRef={bottomRef}
+                onCaseSelection={handleCaseSelection}
+                onCaseSelectionSubmit={(messageId, cases) => {
+                  if (cases.length > 0) {
+                    const query = formatSelectedCasesQuery(cases);
+                    if (query) {
+                      handleSendMessage(query);
+                      setSelectedCases(null);
+                    }
+                  }
+                }}
+              />
+            )}
 
             <div ref={bottomRef} className="h-px" />
           </div>
@@ -262,7 +464,6 @@ export default function ChatPage() {
                 placeholder="Type your message…"
                 onUserSend={handleSendMessage}
                 onBotReply={() => {}}
-                isLoading={inputDisabled}
               />
             </div>
           </div>

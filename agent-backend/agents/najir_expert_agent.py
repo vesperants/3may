@@ -1,7 +1,11 @@
 import os
+import logging
 import google.generativeai as genai
 from google.adk.agents import LlmAgent
 from tools.title_finder_tool import title_finder_retriever
+
+# Set up logger
+logger = logging.getLogger(__name__)
 
 MODEL = "gemini-2.0-flash"
 
@@ -48,7 +52,7 @@ def najir_expert_tool(
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
-        print("LLM error:", e)
+        logger.error(f"LLM error: {e}")
         return "Sorry, an internal error occurred."
 
 # Najir expert agent definition
@@ -64,4 +68,5 @@ najir_expert_agent = LlmAgent(
     tools=[najir_expert_tool],
 )
 
-print(f"✅ najir_expert_agent loaded.") 
+# Log agent initialization instead of printing
+logger.info("najir_expert_agent loaded.") 

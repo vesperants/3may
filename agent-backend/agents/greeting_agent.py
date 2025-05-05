@@ -1,13 +1,16 @@
 import sys
-from google.adk.agents import Agent
+import logging
+from google.adk.agents import LlmAgent
+
+# Set up logger
+logger = logging.getLogger(__name__)
 
 # Attempt to import the tool
 try:
-    from tools.greeting_tool import say_hello
-    # Use stderr for logging status messages
-    print("✅ Imported say_hello tool for greeting_agent.", file=sys.stderr)
+    from tools.say_hello_tool import say_hello
+    logger.info("Imported say_hello tool for greeting_agent.")
 except ImportError as e:
-    print(f"❌ Failed to import say_hello tool: {e}", file=sys.stderr)
+    logger.error(f"Failed to import say_hello tool: {e}")
     say_hello = None
 
 MODEL_GEMINI_2_0_FLASH = "gemini-2.0-flash"
@@ -16,19 +19,20 @@ MODEL_GEMINI_2_0_FLASH = "gemini-2.0-flash"
 greeting_agent = None
 if say_hello:
     try:
-        greeting_agent = Agent(
-            model=MODEL_GEMINI_2_0_FLASH,
+        greeting_agent = LlmAgent(
             name="greeting_agent",
+            model="gemini-2.0-flash",
             instruction=(
-                "You are the Greeting Agent. Your ONLY task is to provide a friendly greeting to the user. "
-                "Use the 'say_hello' tool to generate the greeting. "
-                "Do not engage in any other conversation or tasks. Just greet."
+                "You are a friendly, brief greeter for a legal AI assistant. "
+                "Your goal is to welcome users with short, professional greetings. "
+                "Keep your responses under 2 sentences."
             ),
-            description="Handles simple greetings and hellos using the 'say_hello' tool.",
+            description="Provides friendly greetings in Nepali and English.",
             tools=[say_hello],
         )
+        logger.info(f"Greeting agent '{greeting_agent.name}' created.")
     except Exception as e:
-        print(f"❌ Could not create Greeting agent instance. Error: {e}", file=sys.stderr)
+        logger.error(f"Could not create Greeting agent instance. Error: {e}")
         greeting_agent = None
 else:
-    print("❌ Greeting agent definition skipped because 'say_hello' tool is missing.", file=sys.stderr)
+    logger.warning("Greeting agent definition skipped because 'say_hello' tool is missing.")

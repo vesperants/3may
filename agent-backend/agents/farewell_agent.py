@@ -1,13 +1,16 @@
 import sys
-from google.adk.agents import Agent
+import logging
+from google.adk.agents import LlmAgent
+
+# Set up logger
+logger = logging.getLogger(__name__)
 
 # Attempt to import the tool
 try:
     from tools.farewell_tool import say_goodbye
-    # Use stderr for logging status messages
-    print("✅ Imported say_goodbye tool for farewell_agent.", file=sys.stderr)
+    logger.info("Imported say_goodbye tool for farewell_agent.")
 except ImportError as e:
-    print(f"❌ Failed to import say_goodbye tool: {e}", file=sys.stderr)
+    logger.error(f"Failed to import say_goodbye tool: {e}")
     say_goodbye = None
 
 
@@ -17,20 +20,20 @@ MODEL_GEMINI_2_0_FLASH = "gemini-2.0-flash"
 farewell_agent = None
 if say_goodbye:
     try:
-        farewell_agent = Agent(
-            model=MODEL_GEMINI_2_0_FLASH,
+        farewell_agent = LlmAgent(
             name="farewell_agent",
+            model="gemini-2.0-flash",
             instruction=(
-                "You are the Farewell Agent. Your ONLY task is to provide a polite goodbye message. "
-                "Use the 'say_goodbye' tool when the user indicates they are leaving or ending the conversation "
-                "(e.g., using words like 'bye', 'goodbye', 'thanks bye', 'see you'). "
-                "Do not perform any other actions. Just say goodbye."
+                "You are a polite, brief farewell agent for a legal AI assistant. "
+                "Your goal is to say goodbye to users with short, professional closings. "
+                "Keep your responses under 2 sentences."
             ),
-            description="Handles simple farewells and goodbyes using the 'say_goodbye' tool.",
+            description="Provides polite farewells in Nepali and English.",
             tools=[say_goodbye],
         )
+        logger.info(f"Farewell agent '{farewell_agent.name}' created.")
     except Exception as e:
-        print(f"❌ Could not create Farewell agent instance. Error: {e}", file=sys.stderr)
+        logger.error(f"Could not create Farewell agent instance. Error: {e}")
         farewell_agent = None
 else:
-     print("❌ Farewell agent definition skipped because 'say_goodbye' tool is missing.", file=sys.stderr)
+    logger.warning("Farewell agent definition skipped because 'say_goodbye' tool is missing.")

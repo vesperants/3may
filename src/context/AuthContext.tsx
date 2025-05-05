@@ -23,6 +23,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true); // Start loading until first auth check completes
+  const [authInitialized, setAuthInitialized] = useState(false);
 
   useEffect(() => {
     console.log("AuthContext: Setting up Firebase auth state listener...");
@@ -35,11 +36,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
       setUser(currentUser);
       setLoading(false); // Set loading to false once the check is done
+      setAuthInitialized(true);
     });
+
+    // Add a timeout to ensure loading state changes even if Firebase is slow
+    const timeoutId = setTimeout(() => {
+      if (loading) {
+        console.log("AuthContext: Auth check taking too long, setting loading to false");
+        setLoading(false);
+        setAuthInitialized(true);
+      }
+    }, 5000); // 5 second timeout
 
     // Cleanup listener on component unmount
     return () => {
       console.log("AuthContext: Cleaning up Firebase auth state listener.");
+      clearTimeout(timeoutId);
       unsubscribe();
     };
   }, []); // Empty dependency array ensures this runs only once on mount
@@ -63,9 +75,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Log provider state for debugging
   if (typeof window !== 'undefined') { // Avoid logging during server-side rendering if applicable
-      console.log(`AuthContext: Provider rendering - Loading: ${loading}, User UID: ${user?.uid ?? 'null'}`);
+      console.log(`AuthContext: Provider rendering - Loading: ${loading}, User UID: ${user?.uid ?? 'null'}, Initialized: ${authInitialized}`);
   }
 
+  // If auth is initialized but user is null, we know the user is not logged in for sure
+  // This prevents the loading screen when we're definitely logged out
+  if (!loading || authInitialized) {
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  }
+
+  // Otherwise, show a blank div (the page components will handle loading states themselves)
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

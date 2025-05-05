@@ -2,75 +2,95 @@
 
 /* Main scrollable container for the message list */
 .scrollContainer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 20px;
-    padding-bottom: 20px; /* Space for input area */
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-  }
+  /* Remove absolute positioning which might be causing the loading issue */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem;
+  padding-bottom: 20px; /* Space for input area */
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
   
-  /* Inner wrapper to control message width and centering */
-  .messageWrapper {
-    width: 100%;
-    /* Default max-width, overridden when canvas is shown */
-    max-width: 750px; 
-    margin: 0 auto; /* Center messages by default */
-    display: flex;
-    flex-direction: column;
-  }
+/* Inner wrapper to control message width and centering */
+.messageWrapper {
+  width: 100%;
+  /* Default max-width, overridden when canvas is shown */
+  max-width: 800px; 
+  margin: 0 auto; /* Center messages by default */
+  display: flex;
+  flex-direction: column;
+}
   
-  /* Modifier for message wrapper when canvas is shown */
-  .messageWrapperCanvas {
-    max-width: none;
-    margin: 0;
-  }
+/* Modifier for message wrapper when canvas is shown */
+.messageWrapperCanvas {
+  max-width: 100%;
+}
   
-  /* Row container for each individual message, handles alignment */
-  .messageRow {
-    display: flex;
-    margin-bottom: 10px;
-  }
+/* Row container for each individual message, handles alignment */
+.messageRow {
+  display: flex;
+  margin-bottom: 1rem;
+}
   
-  .messageRowUser {
-    justify-content: flex-end;
-  }
+.messageRowUser {
+  justify-content: flex-end;
+}
   
-  .messageRowBot {
-    justify-content: flex-start;
-  }
+.messageRowBot {
+  justify-content: flex-start;
+}
   
-  /* Styling for markdown elements within bot messages */
-  .markdownParagraph {
-    margin-block-start: 0.1em;
-    margin-block-end: 0.1em;
-  }
+/* Styling for markdown elements within bot messages */
+.markdownParagraph {
+  margin-block-start: 0.1em;
+  margin-block-end: 0.1em;
+}
   
-  .markdownList {
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
-    padding-inline-start: 20px;
-  }
+.markdownList {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+  padding-inline-start: 20px;
+}
   
-  .markdownListItem {
-    margin-block-start: 0.1em;
-    margin-block-end: 0.1em;
-  }
+.markdownListItem {
+  margin-block-start: 0.1em;
+  margin-block-end: 0.1em;
+}
   
-  /* Container for the typing indicator */
-  .typingIndicatorWrapper {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-  }
+/* Container for the typing indicator */
+.typingIndicatorWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: -0.5rem;
+}
   
-  /* Text style for the typing indicator (can inherit from messageText if needed) */
-  .typingIndicatorText {
-    margin: 0;
-  } 
+/* Text style for the typing indicator (can inherit from messageText if needed) */
+.typingIndicatorText {
+  margin: 0;
+  font-style: italic;
+  opacity: 0.7;
+}
+  
+.botMessageContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 300px; /* Ensure reasonable minimum width for case lists */
+}
+  
+.botMessageContent p {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .botMessageContent {
+    min-width: 240px; /* Smaller minimum width on mobile */
+    max-width: 100%; /* Allow full width on smaller screens */
+  }
+} 
