@@ -9,6 +9,13 @@ import os
 import uuid
 from tools.case_search_tool import case_search_tool
 
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+logger = logging.getLogger(__name__)
+
 # Try to import najir_expert_tool
 try:
     from agents.najir_expert_agent import najir_expert_tool
@@ -16,13 +23,6 @@ try:
 except ImportError as e:
     logger.warning(f"Failed to import najir_expert_tool: {e}")
     najir_expert_tool = None
-
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s"
-)
-logger = logging.getLogger(__name__)
 
 # Create FastAPI app
 app = FastAPI()

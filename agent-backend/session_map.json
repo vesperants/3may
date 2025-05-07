@@ -770,7 +770,7 @@
     "df54e969": {
       "sid": "4917698246379307008",
       "title": "give me details of cases 7843 ",
-      "updatedAt": "2025-05-07T14:11:22.711265Z",
+      "updatedAt": "2025-05-07T14:16:51.427075Z",
       "log": [
         {
           "sender": "user",
@@ -812,6 +812,16 @@
           "sender": "bot",
           "text": "Here are the details for the cases you requested:\n\nCase 7843:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096a\u0969 - \u091c\u093e\u0932\u0938\u093e\u091c \u0938\u092e\u0947\u0924\n\nCase 9940:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096f\u096a\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n",
           "ts": "2025-05-07T14:11:22.711265Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843, 9940, 7850, and 9685",
+          "ts": "2025-05-07T14:16:51.427075Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the details for the cases you requested:\n\nCase 7843:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096a\u0969 - \u091c\u093e\u0932\u0938\u093e\u091c \u0938\u092e\u0947\u0924\n\nCase 9940:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096f\u096a\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n\nCase 7850:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096b\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\u092f\u0941\u0915\u094d\u0924 \u092a\u0930\u092e\u093e\u0926\u0947\u0936\u0915\u094b \u0906\u0926\u0947\u0936 \u091c\u093e\u0930\u0940 \u0917\u0930\u093f\u092a\u093e\u090a\u0901\n\nCase 9685:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096c\u096e\u096b - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n",
+          "ts": "2025-05-07T14:16:51.427075Z"
         }
       ]
     }
