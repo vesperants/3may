@@ -43,15 +43,23 @@ def retrieve_case_title(
             return data["title"]
     return None
 
-def title_finder_retriever(
+def najir_expert_tool(
     case_number: str,
-    project_id: str,
-    location: str,
-    engine_id: str
+    project_id: str = PROJECT_ID,
+    location: str = LOCATION_ID,
+    engine_id: str = ENGINE_ID
 ) -> str:
     """
-    Pure retrieval: Fetch only the title of a Supreme Court case by case number.
-    Returns an empty string if not found.
+    Retrieve case details by case number.
+    
+    Args:
+        case_number (str): The case number to search for
+        project_id (str, optional): Google Cloud project ID
+        location (str, optional): Location for Discovery Engine
+        engine_id (str, optional): Discovery Engine ID
+        
+    Returns:
+        str: The title of the case if found, empty string if not found
     """
     title = retrieve_case_title(case_number, project_id, location, engine_id)
     if not title:

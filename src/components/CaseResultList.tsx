@@ -11,12 +11,14 @@ interface CaseResultListProps {
   cases: Case[];
   onSelectionChange: (selectedCases: Case[]) => void;
   onSubmitSelection?: (selectedCases: Case[]) => void;
+  disabled?: boolean;
 }
 
 const CaseResultList: React.FC<CaseResultListProps> = ({ 
   cases, 
   onSelectionChange,
-  onSubmitSelection
+  onSubmitSelection,
+  disabled = false
 }) => {
   const [selectedCases, setSelectedCases] = useState<Case[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -79,7 +81,7 @@ const CaseResultList: React.FC<CaseResultListProps> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${disabled ? styles.disabled : ''}`}>
       <div className={styles.header}>
         <span>Found {cases.length} cases</span>
         <div className={styles.searchContainer}>
@@ -89,6 +91,7 @@ const CaseResultList: React.FC<CaseResultListProps> = ({
             value={searchTerm}
             onChange={handleSearchChange}
             className={styles.searchInput}
+            disabled={disabled}
           />
           {searchTerm && filteredCases.length !== cases.length && (
             <div className={styles.filterInfo}>
@@ -98,9 +101,15 @@ const CaseResultList: React.FC<CaseResultListProps> = ({
         </div>
       </div>
       <div 
-        className={styles.caseList}
+        className={`${styles.caseList} ${disabled ? styles.disabledList : ''}`}
         onWheel={handleWheel}
       >
+        {disabled && (
+          <div className={styles.disabledOverlay}>
+            Use the latest search results
+          </div>
+        )}
+        
         {filteredCases.length > 0 ? (
           filteredCases.map((caseItem) => (
             <div key={caseItem.id} className={styles.caseItem}>
@@ -108,8 +117,9 @@ const CaseResultList: React.FC<CaseResultListProps> = ({
                 <input
                   type="checkbox"
                   checked={selectedCases.some(c => c.id === caseItem.id)}
-                  onChange={() => handleCheckboxChange(caseItem)}
+                  onChange={() => !disabled && handleCheckboxChange(caseItem)}
                   className={styles.checkbox}
+                  disabled={disabled}
                 />
                 <div className={styles.caseInfo}>
                   <span className={styles.caseId}>निर्णय नं. {caseItem.id}</span>
@@ -133,6 +143,7 @@ const CaseResultList: React.FC<CaseResultListProps> = ({
             <button 
               onClick={handleSubmit}
               className={styles.submitButton}
+              disabled={disabled}
             >
               Get details
             </button>

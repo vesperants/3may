@@ -33,6 +33,13 @@ interface ConversationMeta {
   updatedAt?: string;
 }
 
+// Define an interface for agent request body
+interface AgentRequestBody {
+  message: string;
+  cid: string;
+  selectedCaseIds?: string[];
+}
+
 /* ------------------------------------------------------------------ */
 export default function ChatPage() {
   const { user, loading: authLoading } = useAuth();
@@ -197,18 +204,45 @@ export default function ChatPage() {
     setIsSending(true); setError(null);
     const now = new Date();
 
-    const thinkingId = `thinking-${Date.now()}`;
+    // Add the user message to the chat
+    const userMsgId = `u-${Date.now()}`;
     setMessages(p => [
       ...p,
-      { sender: 'user', text: clean, id: `u-${Date.now()}`, timestamp: now },
-      { sender: 'bot',  text: '...', id: thinkingId, timestamp: now },
+      { sender: 'user', text: clean, id: userMsgId, timestamp: now },
     ]);
     setInputMsg('');
 
+    // Default behavior for all messages
+    const thinkingId = `thinking-${Date.now()}`;
+    setMessages(p => [
+      ...p,
+      { sender: 'bot', text: '...', id: thinkingId, timestamp: now },
+    ]);
+
     try {
+      // Prepare request body with message and conversation ID
+      const requestBody: AgentRequestBody = { message: clean, cid: activeCid };
+
+      // Find if there are any selected cases to include
+      const messageWithSelectedCases = [...messages].reverse().find(
+        msg => msg.sender === 'bot' && msg.selectedCases && msg.selectedCases.length > 0
+      );
+      
+      if (messageWithSelectedCases?.selectedCases?.length) {
+        // Include the selected case IDs in the request
+        requestBody.selectedCaseIds = messageWithSelectedCases.selectedCases.map(c => c.id);
+        console.log('====== SELECTED CASES DEBUG ======');
+        console.log('Found message with selected cases:', messageWithSelectedCases.id);
+        console.log('Selected cases IDs:', requestBody.selectedCaseIds);
+        console.log('Selected cases data:', JSON.stringify(messageWithSelectedCases.selectedCases));
+        console.log('User query:', clean);
+        console.log('==================================')
+      }
+
+      // Send the request to the backend
       const res = await authFetch('/api/agent', {
         method: 'POST',
-        body: JSON.stringify({ message: clean, cid: activeCid }),
+        body: JSON.stringify(requestBody),
       });
       setMessages(p => p.filter(m => m.id !== thinkingId));
 
@@ -248,8 +282,10 @@ export default function ChatPage() {
 
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Unknown error');
+      setMessages(p => p.filter(m => m.id !== thinkingId));
+    } finally {
+      setIsSending(false);
     }
-    finally { setIsSending(false); textareaRef.current?.focus(); }
   };
 
   /* scroll */
@@ -368,11 +404,11 @@ export default function ChatPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       {/* header */}
-      <div className="relative">
+      <div>
         <button
           onClick={() => setShelfOpen(o => !o)}
           aria-label="Open conversations"
-          className="absolute left-3 top-3 z-20 rounded p-2 text-gray-600 transition hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="fixed left-3 top-3 z-[1001] rounded p-2 text-gray-600 transition hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <svg
             width="24"
@@ -452,8 +488,9 @@ export default function ChatPage() {
           </div>
 
           {/* input */}
-          <div className="fixed bottom-0 left-0 right-0 border-t bg-gray-50 py-4">
-            <div className="mx-auto w-full max-w-[920px] px-4">
+          <div className="fixed bottom-6 left-0 right-0 py-4">
+            <div className="absolute inset-0 bg-white"></div>
+            <div className="mx-auto w-full max-w-[920px] px-4 relative">
               <ChatInputArea
                 ref={textareaRef}
                 message={inputMsg}

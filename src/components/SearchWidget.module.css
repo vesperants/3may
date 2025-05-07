@@ -1,0 +1,140 @@
+.searchWidget {
+  background: #F6F8FB;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 16px 16px 16px;
+  font-family: inherit;
+  border: 1px solid #eaeaea;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid #d6d9e0;
+  border-radius: 16px;
+  padding: 7px 13px;
+  font-size: 15px;
+  background: #fff;
+  outline: none;
+  height: 36px;
+}
+
+.searchButton {
+  margin-left: -34px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #999;
+  outline: none;
+  padding: 0 10px 0 2px;
+}
+
+.searchButton:disabled {
+  cursor: default;
+}
+
+.resultsCount {
+  color: #888;
+  font-size: 12px;
+  margin: 0 0 6px 3px;
+  text-align: left;
+}
+
+.resultsList {
+  max-height: 220px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  padding: 5px 3px;
+  min-height: 30px;
+}
+
+.noResults {
+  color: #bbb;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 19px;
+  margin-bottom: 17px;
+  font-weight: 500;
+}
+
+.resultItem {
+  padding: 7px 8px 6px 8px;
+  border-bottom: 1px solid #f3f5fa;
+  font-size: 15px;
+  margin-bottom: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resultItem:hover {
+  background-color: #f8f9fb;
+}
+
+.resultTitle {
+  color: #2154b6;
+  font-weight: 500;
+  font-size: 15px;
+  word-break: break-word;
+  flex: 1;
+}
+
+.checkboxContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.loading {
+  color: #bbb;
+  text-align: center;
+  padding: 9px;
+  font-size: 15px;
+}
+
+/* Add styles for disabled state */
+.disabled {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+
+.disabledList {
+  position: relative;
+}
+
+.disabledOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(240, 240, 240, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  border-radius: 8px;
+  z-index: 5;
+} 

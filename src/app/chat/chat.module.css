@@ -144,18 +144,21 @@
   /* --- Input Area Styles --- */
   .inputAreaWrapper {
     width: 100%;
-    /* allow input area to fill parent container width */
     max-width: none;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 2px; /* Add margin to raise it up */
     border-radius: 26px;
-    border: 0px solid #ddd;
-    /* Stronger, bi-directional shadow to better separate the input component */
-    box-shadow: 0 -1px 4px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.1);
+    border: none;
+    /* Create a more pronounced shadow for the floating effect */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    /* Make sure the background is completely opaque */
     background-color: #fff;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    /* Add a backdrop to ensure nothing shows through */
+    backdrop-filter: blur(10px);
   }
   .selectedFilesContainer {
     display: flex;
@@ -163,7 +166,8 @@
     overflow-x: auto;
     gap: 8px;
     padding: 8px 15px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background-color: rgba(255,255,255,0.7); /* Semi-transparent background */
   }
   .selectedFileItem {
     display: flex;
@@ -195,7 +199,7 @@
   .inputFormWrapper {
     display: flex;
     padding: 0;
-    background-color: transparent;
+    background-color: #fff;
   }
   .textareaBase {
     width: 100%;

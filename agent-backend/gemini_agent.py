@@ -109,20 +109,84 @@ def cached_session(uid: str, cid: str) -> str:
 
 
 # ─── main chat routine ───────────────────────────────────────────────
-def chat(uid: str, cid: str, msg: str) -> str:
+def chat(uid: str, cid: str, msg: str, selected_case_ids: list = None) -> str:
+    log.info("=============== BACKEND DEBUG ===============")
+    log.info(f"Chat function called with:")
+    log.info(f"  - uid: {uid}")
+    log.info(f"  - cid: {cid}")
+    log.info(f"  - msg: {msg}")
+    log.info(f"  - selected_case_ids: {selected_case_ids}")
+    log.info("===========================================")
+    
     cache = load_map()
     user_cache = cache.setdefault(uid, {})
     entry = user_cache.setdefault(cid, {})
 
     sid = cached_session(uid, cid)
 
+    # If selected_case_ids are provided, store them in the session state
+    if selected_case_ids and len(selected_case_ids) > 0:
+        log.info(f"Received {len(selected_case_ids)} selected case IDs: {selected_case_ids}")
+        
+        # If this is a request for details about selected cases, handle it directly
+        if "selected cases" in msg.lower() or "details" in msg.lower():
+            log.info("=============== DIRECT HANDLING DEBUG ===============")
+            log.info(f"Detected request for case details in message: '{msg}'")
+            log.info(f"Selected case IDs available: {selected_case_ids}")
+            log.info("===================================================")
+            
+            log.info("Direct handling of case details request")
+            try:
+                # Import the case_details_tool directly
+                log.info("Importing case_details_tool...")
+                from agents.case_details_agent import case_details_tool
+                
+                # Call the tool directly with the selected case IDs
+                log.info(f"Calling case_details_tool with case_ids={selected_case_ids}...")
+                result = case_details_tool(
+                    question=f"Provide detailed information about these cases: {msg}",
+                    case_ids=selected_case_ids
+                )
+                
+                if result:
+                    log.info(f"Successfully processed details for {len(selected_case_ids)} cases")
+                    log.info(f"Result length: {len(result)} characters")
+                    log.info(f"First 100 chars of result: {result[:100]}...")
+                    
+                    # Check if this is a markdown response that needs to be wrapped
+                    if result.startswith("# Case Details"):
+                        log.info("Wrapping case details response in structured JSON format")
+                        # Create a structured response with type CASE_DETAILS
+                        structured_response = {
+                            "type": "CASE_DETAILS",
+                            "text": "Case details information",
+                            "data": {
+                                "content": result,
+                                "case_ids": selected_case_ids
+                            }
+                        }
+                        return json.dumps(structured_response)
+                    
+                    return result
+                else:
+                    log.warning("No result from direct case_details_tool call")
+            except Exception as e:
+                log.exception(f"Error calling case_details_tool directly: {e}")
+        else:
+            log.info("Selected case IDs provided but not a details request")
+    
     # ---- send to agent ----------------------------------------------------
     reply = "Agent did not reply."
     
     if USE_ROOT_AGENT:
         try:
             # Use the root agent for routing
-            reply = route_to_agent(user_id=uid, session_id=sid, message=msg)
+            log.info(f"Routing to agent with message: {msg[:50]}...")
+            if selected_case_ids:
+                log.info(f"Case IDs selected: {selected_case_ids}")
+                reply = route_to_agent(user_id=uid, session_id=sid, message=msg, selected_case_ids=selected_case_ids)
+            else:
+                reply = route_to_agent(user_id=uid, session_id=sid, message=msg)
             log.info(f"Root agent response (first 100 chars): {reply[:100]}...")
             
             # Handle structured responses (especially case search results)
@@ -221,13 +285,37 @@ def chat(uid: str, cid: str, msg: str) -> str:
 
 # ─── CLI entry point ─────────────────────────────────────────────────
 if __name__ == "__main__":
+    log.info("=============== CLI ENTRY POINT DEBUG ===============")
+    log.info(f"CLI args: {sys.argv}")
+    
     if len(sys.argv) < 4:
+        log.error("❌ Missing required arguments")
         print("❌ need <user_id> <conversation_id> <message>")
         sys.exit(1)
     uid, cid = sys.argv[1:3]
-    message = " ".join(sys.argv[3:]) or "(empty)"
+    
+    # Check if there's a JSON string of case IDs as the last argument
+    selected_case_ids = None
+    if len(sys.argv) > 4 and sys.argv[-1].startswith('[') and sys.argv[-1].endswith(']'):
+        try:
+            selected_case_ids = json.loads(sys.argv[-1])
+            log.info(f"Detected selected case IDs in command line: {selected_case_ids}")
+            # Remove the case IDs JSON from the arguments
+            message = " ".join(sys.argv[3:-1]) or "(empty)"
+            log.info(f"Message after removing case IDs: {message}")
+        except json.JSONDecodeError as e:
+            log.error(f"Failed to parse JSON case IDs: {e}")
+            # Not valid JSON, treat as part of the message
+            message = " ".join(sys.argv[3:]) or "(empty)"
+            log.info(f"Treating all remaining args as message: {message}")
+    else:
+        message = " ".join(sys.argv[3:]) or "(empty)"
+        log.info(f"No case IDs found, message: {message}")
+    
+    log.info("====================================================")
+    
     try:
-        print(chat(uid, cid, message))
+        print(chat(uid, cid, message, selected_case_ids))
     except Exception as e:
         log.exception(e)
         print("❌ error")

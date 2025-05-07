@@ -51,7 +51,7 @@
     "bc4edd32": {
       "sid": "3320046278569623552",
       "title": "hi",
-      "updatedAt": "2025-05-05T11:07:19.357265Z",
+      "updatedAt": "2025-05-05T17:04:34.426756Z",
       "log": [
         {
           "sender": "user",
@@ -344,8 +344,551 @@
           "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u0967\u0966\u096b\u0968\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0968\u0969 - \u0930\u093e\u091c\u094d\u092f \u0935\u093f\u0930\u0942\u0926\u094d\u0927\u0915\u094b \u0905\u092a\u0930\u093e\u0927\"}, {\"id\": \"\u0969\u096f\u0968\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096f\u0968\u096c - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u096d\u096d\u0967\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096d\u0967\u096d - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\"}, {\"id\": \"\u0969\u0969\u0968\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u0969\u0968\u096e - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\"}, {\"id\": \"\u0967\u0969\u096b\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0969\u096b\u0966 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\"}, {\"id\": \"\u096d\u0968\u096b\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0968\u096b\u096a - \u0935\u0915\u0938\u092a\u0924\u094d\u0930 \u0935\u0926\u0930\"}, {\"id\": \"\u096d\u096f\u096e\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096f\u096e\u096a - \u0928\u093f\u091c\u093e\u092e\u0924\u0940 \u0938\u0947\u0935\u093e \u0928\u093f\u092f\u092e\u093e\u0935\u0932\u0940, \u0968\u0966\u096b\u0966 \u0915\u094b \u0928\u093f\u092f\u092e \u096e\u096d \u0916 (\u0968) \u0932\u093e\u0908 \u092a\u094d\u0930\u093e\u0930\u092e\u094d\u092d\u0924\u0903 \u0905\u092e\u093e\u0928\u094d\u092f \u0918\u094b\u0937\u093f\u0924 \u0917\u0930\u0940 \u092a\u0930\u092e\u093e\u0926\u0947\u0936 \u0938\u092e\u0947\u0924 \u091c\u093e\u0930\u0940 \u0917\u0930\u093f\u092a\u093e\u090a\u0901 \u0964\"}, {\"id\": \"\u0967\u0966\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c - \u0905\u0902\u0936\"}, {\"id\": \"\u0967\u0966\u096c\u0967\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c\u0967\u096e - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u096e\u0966\u0966\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0966\u0966\u096c - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"U2M5gTM0QmN4IzYz0CZkJWOtIWZzITLwADMw0COhZjM4MDO2QiGCQvkFzPEGAs8gaOCMIBMxIgC\"}}",
           "structured": true,
           "ts": "2025-05-05T11:07:19.357265Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me laws related to sagar thapa",
+          "ts": "2025-05-05T15:13:44.950113Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the cases related to your search:\n\n1.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0968\u0969 - \u0930\u093e\u091c\u094d\u092f \u0935\u093f\u0930\u0942\u0926\u094d\u0927\u0915\u094b \u0905\u092a\u0930\u093e\u0927\n2.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096f\u0968\u096c - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\n3.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096d\u0967\u096d - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\n4.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u0969\u0968\u096e - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\n5.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u096c\u096e\u096c - \u091f\u094d\u0930\u0947\u0921\u092e\u093e\u0930\u094d\u0915 \u0926\u0930\u094d\u0924\u093e\n6.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096f\u096e\u096a - \u0928\u093f\u091c\u093e\u092e\u0924\u0940 \u0938\u0947\u0935\u093e \u0928\u093f\u092f\u092e\u093e\u0935\u0932\u0940, \u0968\u0966\u096b\u0966 \u0915\u094b \u0928\u093f\u092f\u092e \u096e\u096d \u0916 (\u0968) \u0932\u093e\u0908 \u092a\u094d\u0930\u093e\u0930\u092e\u094d\u092d\u0924\u0903 \u0905\u092e\u093e\u0928\u094d\u092f \u0918\u094b\u0937\u093f\u0924 \u0917\u0930\u0940 \u092a\u0930\u092e\u093e\u0926\u0947\u0936 \u0938\u092e\u0947\u0924 \u091c\u093e\u0930\u0940 \u0917\u0930\u093f\u092a\u093e\u090a\u0901 \u0964\n7.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c - \u0905\u0902\u0936\n8.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c\u0967\u096e - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n9.  \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0966\u0966\u096c - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 \u0964\n10. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0969\u096a\u096c - \u092d\u094d\u0930\u0937\u094d\u091f\u093e\u091a\u093e\u0930\n\nWould you like more information about any of these cases?\n",
+          "ts": "2025-05-05T15:13:44.950113Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me laws related to rape",
+          "ts": "2025-05-05T16:58:05.565342Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are some cases related to laws about rape:\n1. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u096d\u0967\u0969 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\n2. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096c\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 / \u0939\u093e\u0921\u0928\u093e\u0924\u093e \u0915\u0930\u0923\u0940\n3. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0969\u096c\u096d - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n4. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096f\u096c - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n5. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u096c\u096f\u096b - \u091c\u0935\u0930\u094d\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0964\n6. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u096b\u096c\u096a - \u091c\u092c\u0930\u094d\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n7. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c\u096b\u096d - \u092e\u093e\u0928\u0935 \u092c\u0947\u091a\u092c\u093f\u0916\u0928 \u0924\u0925\u093e \u0913\u0938\u093e\u0930\u092a\u0938\u093e\u0930 / \u0939\u093e\u0921\u0928\u093e\u0924\u093e \u0915\u0930\u0923\u0940\n8. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u096e\u096b\u096b - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n9. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u0967\u096a\u096e - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n10. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096b\u0969\u096c - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n\nDo you want to see more?\n",
+          "ts": "2025-05-05T16:58:05.565342Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to rape",
+          "ts": "2025-05-05T17:04:34.426756Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096e\u096a\u096d\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u096a\u096d\u096d - \u0939\u093e\u0921\u0928\u093e\u0924\u093e \u0915\u0930\u0923\u0940 \u0964\"}, {\"id\": \"\u096a\u096d\u0967\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u096d\u0967\u0969 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\"}, {\"id\": \"\u0968\u096e\u0968\u0967\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u096e\u0968\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0909\u0926\u094d\u092f\u094b\u0917\"}, {\"id\": \"\u0967\u0966\u096f\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096f\u0966\u0966 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096e\u096b\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096e\u096b\u096e - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0909\u0926\u094d\u092f\u094b\u0917\"}, {\"id\": \"\u096c\u096f\u096a\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u096f\u096a\u096f - \u091c\u0935\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u096d\u096f\u0968\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096f\u0968\u0969 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0964\"}, {\"id\": \"\u096e\u0967\u096d\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0967\u096d\u096f - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u096e\u0966\u0969\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0966\u0969\u096e - \u092a\u0930\u092e\u093e\u0926\u0947\u0936\"}, {\"id\": \"\u0969\u096d\u0968\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096d\u0968\u096b - \u091c\u094d\u092f\u093e\u0928 \u0938\u092e\u094d\u092c\u0928\u094d\u0927\u0940\"}], \"totalCount\": 10, \"nextPageToken\": \"MWZ3ADNmVGNxMGNx0yYkJjYtMjMkJTLwADMw0yYkVzMwMDO2QiGCg95YuJEGA88IHKCMIBMxIgC\"}}",
+          "structured": true,
+          "ts": "2025-05-05T17:04:34.426756Z"
         }
       ]
+    },
+    "b670d80a": {
+      "sid": "376943922083004416",
+      "title": "hi, how's it going?",
+      "updatedAt": "2025-05-06T04:58:54.443084Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "hi, how's it going?",
+          "ts": "2025-05-05T17:05:57.695186Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hi, I'm doing well, thank you for asking! How can I help you today with your legal queries?\n",
+          "ts": "2025-05-05T17:05:57.695186Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-05T17:08:54.590416Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hello! How can I assist you with your legal questions today?\n",
+          "ts": "2025-05-05T17:08:54.590416Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to sagar thapa",
+          "ts": "2025-05-05T17:09:13.316135Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u0967\u0966\u096b\u0968\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0968\u0969 - \u0930\u093e\u091c\u094d\u092f \u0935\u093f\u0930\u0942\u0926\u094d\u0927\u0915\u094b \u0905\u092a\u0930\u093e\u0927\"}, {\"id\": \"\u0969\u0969\u0968\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u0969\u0968\u096e - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\"}, {\"id\": \"\u0967\u0969\u096b\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0969\u096b\u0966 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\"}, {\"id\": \"\u0967\u0966\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c - \u0905\u0902\u0936\"}, {\"id\": \"\u096c\u0968\u0968\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0968\u0968\u096c - \u0915\u0930\u094d\u0924\u0935\u094d\u092f\u091c\u094d\u092f\u093e\u0928 \u0964\"}, {\"id\": \"\u096f\u096c\u096e\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096c\u096e\u096b - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\"}, {\"id\": \"\u096d\u096d\u096e\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096d\u096e\u096a - \u0905\u0902\u0936 \u091a\u0932\u0928\"}, {\"id\": \"\u096f\u0969\u096b\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0969\u096b\u096a - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u096f\u0967\u096c\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0967\u096c\u096f - \u0938\u0935\u093e\u0930\u0940 \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u0967\u0968\u0969\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0968\u0969\u096d - \u092b\u0948\u0938\u0932\u093e \u092c\u0926\u0930\"}], \"totalCount\": 10, \"nextPageToken\": \"QTM1ImMkljM0IDO10SYlRWOtIDZyITLwADMw0CN0QDOiJDO2QiGCIa8fTNEGA88KjLCMIBMxIgC\"}}",
+          "structured": true,
+          "ts": "2025-05-05T17:09:13.316135Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-06T04:58:54.443084Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hi there! How can I help you with your legal queries related to Nepali Supreme Court cases?\n",
+          "ts": "2025-05-06T04:58:54.443084Z"
+        }
+      ]
+    },
+    "ad21ec30": {
+      "sid": "6045849953035616256",
+      "title": "Hi, give me some cases related",
+      "updatedAt": "2025-05-06T11:34:06.370076Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "Hi, give me some cases related to rape",
+          "ts": "2025-05-06T10:26:08.251913Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u0967\u0967\u0967\u0966\u0967\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u0966\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0967\u0967\u096a\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u096a\u0966 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096d\u0966\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096d\u0966\u096d - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096e\u0968\u0968\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096e\u0968\u0968 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096a\u096c\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096a\u096c\u096a - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096e\u0967\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096e\u0967\u096f - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096d\u0967\u0967\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096d\u0967\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0967\u0967\u096e\u0967\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u096e\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0917\u0930\u0940 \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u0967\u0966\u096d\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096d\u0969\u096a - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928 \u0930 \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u096a\u096d\u0967\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u096d\u0967\u0969 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\"}], \"totalCount\": 10, \"nextPageToken\": \"MGNjZGMkljM0IDO10SMxETYtMjYxITLwADMw0yM1MDOjFDO2QiGBMulYrLEGA89w-LCMIBMxIgC\"}}",
+          "structured": true,
+          "ts": "2025-05-06T10:26:08.251913Z"
+        },
+        {
+          "sender": "user",
+          "text": "i want details about case 10523",
+          "ts": "2025-05-06T10:34:42.716878Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I found multiple cases related to your query \"case 10523\". Here are some of them:\n\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u096d\u096c\u096a - \u092d\u094d\u0930\u0937\u094d\u091f\u093e\u091a\u093e\u0930\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0966\u096f\u0969 - \u0916\u0942\u0928 \u0921\u093e\u0901\u0915\u093e \u0964\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u096e\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0917\u0930\u0940 \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u096b\u096e\u0968 - \u0915\u0940\u0930\u094d\u0924\u0947 \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0966\u096d\u0966 - \u0915\u0940\u0930\u094d\u0924\u0947 \u091c\u093e\u0932\u0938\u093e\u091c\u0940 \u0964\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0966\u0968\u0969 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940 \u0915\u0940\u0930\u094d\u0924\u0947\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u096f\u0966\u096a - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0969\u096a - \u0915\u093f\u0930\u094d\u0924\u0947 \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u096c\u0967 - \u0917\u0948\u0930\u0915\u093e\u0928\u0942\u0928\u0940\u0930\u0942\u092a\u092e\u093e \u0938\u092e\u094d\u092a\u0924\u094d\u0924\u093f \u0906\u0930\u094d\u091c\u0928 \u0917\u0930\u093f \u092d\u094d\u0930\u0937\u094d\u091f\u093e\u091a\u093e\u0930 \u0917\u0930\u0947\u0915\u094b \u0964\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u096e\u0968\u0968 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n\nPlease let me know if you need information about any of these specific cases.\n",
+          "ts": "2025-05-06T10:34:42.716878Z"
+        },
+        {
+          "sender": "user",
+          "text": "explain to me about case number 10523",
+          "ts": "2025-05-06T10:35:17.089560Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I found the following cases related to your query \"case number 10523\":\n\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u0968\u096b\u0968 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u0967\u0969\u096b - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u096c\u0967 - \u0917\u0948\u0930\u0915\u093e\u0928\u0942\u0928\u0940\u0930\u0942\u092a\u092e\u093e \u0938\u092e\u094d\u092a\u0924\u094d\u0924\u093f \u0906\u0930\u094d\u091c\u0928 \u0917\u0930\u093f \u092d\u094d\u0930\u0937\u094d\u091f\u093e\u091a\u093e\u0930 \u0917\u0930\u0947\u0915\u094b \u0964\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096a\u0966 - \u0905\u092a\u0939\u0930\u0923 \u0917\u0930\u0940 \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u0968\u0967\u096b - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0966\u0966\u0966 - \u0938\u0935\u093e\u0930\u0940 \u091c\u094d\u092f\u093e\u0928\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0969\u096c\u096b - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u0968\u0967\u0968 - \u092e\u093e\u0928\u093f\u0938 \u092c\u093f\u0915\u094d\u0930\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0967\u096a\u096f - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096e\u0969\u0967 - \u092e\u093e\u0928\u0935 \u092c\u0947\u091a\u092c\u093f\u0916\u0928 \u0924\u0925\u093e \u0913\u0938\u093e\u0930\u092a\u0938\u093e\u0930\n\nIs there a specific case you'd like to know more about?\n",
+          "ts": "2025-05-06T10:35:17.089560Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-06T11:12:25.397962Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hello! How can I help you today?\n",
+          "ts": "2025-05-06T11:12:25.397962Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-06T11:12:37.742826Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hello! How can I assist you with your legal query?\n",
+          "ts": "2025-05-06T11:12:37.742826Z"
+        },
+        {
+          "sender": "user",
+          "text": "how's it going?",
+          "ts": "2025-05-06T11:13:04.633275Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I am doing well, thank you for asking. How can I help you with your legal question?\n",
+          "ts": "2025-05-06T11:13:04.633275Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to drugs",
+          "ts": "2025-05-06T11:13:23.734522Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u0967\u0967\u0966\u096d\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096d\u096a\u0969\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"gN5EDM3MmYzIjM0ETL0ITZh1SM4QjMtADMwATLkJjZxMWM4YDJaITwZCLEGA89GPNCLIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T11:13:23.734522Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to rape",
+          "ts": "2025-05-06T11:20:27.004754Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096e\u096a\u096d\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u096a\u096d\u096d - \u0939\u093e\u0921\u0928\u093e\u0924\u093e \u0915\u0930\u0923\u0940 \u0964\"}, {\"id\": \"\u096a\u096d\u0967\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u096d\u0967\u0969 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\"}, {\"id\": \"\u0968\u096e\u0968\u0967\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u096e\u0968\u0967 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0909\u0926\u094d\u092f\u094b\u0917\"}, {\"id\": \"\u0967\u0966\u096f\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096f\u0966\u0966 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u0967\u0966\u096e\u096b\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096e\u096b\u096e - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0909\u0926\u094d\u092f\u094b\u0917\"}, {\"id\": \"\u096c\u096f\u096a\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u096f\u096a\u096f - \u091c\u0935\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u096d\u096f\u0968\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096f\u0968\u0969 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940 \u0964\"}, {\"id\": \"\u096e\u0967\u096d\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0967\u096d\u096f - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\"}, {\"id\": \"\u096e\u0966\u0969\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096e\u0966\u0969\u096e - \u092a\u0930\u092e\u093e\u0926\u0947\u0936\"}, {\"id\": \"\u0969\u096d\u0968\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096d\u0968\u096b - \u091c\u094d\u092f\u093e\u0928 \u0938\u092e\u094d\u092c\u0928\u094d\u0927\u0940\"}], \"totalCount\": 10, \"nextPageToken\": \"YTOxAzNjJ2MyIDNx0CNyUWYtEDO0ITLwADMw0iZmZjMjFDO2QiGB8c9jvPEGA89JrPCMIBMxIgC\", \"query\": \"rape\"}}",
+          "structured": true,
+          "ts": "2025-05-06T11:20:27.004754Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of case number 9023",
+          "ts": "2025-05-06T11:34:06.370076Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I found several cases related to the query \"case number 9023\":\n\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096f\u096d\u0968 - \u0932\u093f\u0916\u0924 \u0926\u0930\u094d\u0924\u093e \u092c\u0926\u0930\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u096c\u0967 - \u0917\u0948\u0930\u0915\u093e\u0928\u0942\u0928\u0940\u0930\u0942\u092a\u092e\u093e \u0938\u092e\u094d\u092a\u0924\u094d\u0924\u093f \u0906\u0930\u094d\u091c\u0928 \u0917\u0930\u093f \u092d\u094d\u0930\u0937\u094d\u091f\u093e\u091a\u093e\u0930 \u0917\u0930\u0947\u0915\u094b \u0964\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u0967\u0969\u096b - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096a\u096d\u096f - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096f\u096a\u096d - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 \u0938\u0939\u093f\u0924 \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096a\u0966 - \u0905\u092a\u0939\u0930\u0923 \u0917\u0930\u0940 \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u0968\u0967\u0968 - \u092e\u093e\u0928\u093f\u0938 \u092c\u093f\u0915\u094d\u0930\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0968\u096c\u096a\u096f - \u0906\u0917\u0932\u093e\u0917\u0940\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0967\u096a\u096f - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\n- \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096d\u0967 - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n\nPlease specify which case you'd like details on.\n",
+          "ts": "2025-05-06T11:34:06.370076Z"
+        }
+      ]
+    },
+    "2d1a0f53": {
+      "sid": "6946569878509715456",
+      "title": "hi",
+      "updatedAt": "2025-05-07T13:53:03.197665Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-06T11:49:50.386509Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hello! How can I help you with your legal query today?\n",
+          "ts": "2025-05-06T11:49:50.386509Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to drugs",
+          "ts": "2025-05-06T11:50:28.167418Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u0967\u0967\u0966\u096d\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096d\u096a\u0969\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"YTOxAzNjJ2MyIDNx0CNyUWYtEDO0ITLwADMw0SOhRGNjFDO2QiGBUe_RXKEGA89YPICMIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T11:50:28.167418Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details about those selected cases",
+          "ts": "2025-05-06T11:57:56.957681Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I am sorry, I need you to provide me with the case details or case IDs for which you need information.\n",
+          "ts": "2025-05-06T11:57:56.957681Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details about those selected cases",
+          "ts": "2025-05-06T12:17:56.759119Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I can't provide details without knowing which cases you're referring to. Could you please specify the case IDs or titles?\n",
+          "ts": "2025-05-06T12:17:56.759119Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to sagar thapa",
+          "ts": "2025-05-06T12:18:15.148037Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u0967\u0966\u096b\u0968\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0968\u0969 - \u0930\u093e\u091c\u094d\u092f \u0935\u093f\u0930\u0942\u0926\u094d\u0927\u0915\u094b \u0905\u092a\u0930\u093e\u0927\"}, {\"id\": \"\u0969\u0969\u0968\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u0969\u0968\u096e - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\"}, {\"id\": \"\u0967\u0969\u096b\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0969\u096b\u0966 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\"}, {\"id\": \"\u0967\u0966\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c - \u0905\u0902\u0936\"}, {\"id\": \"\u096c\u0968\u0968\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0968\u0968\u096c - \u0915\u0930\u094d\u0924\u0935\u094d\u092f\u091c\u094d\u092f\u093e\u0928 \u0964\"}, {\"id\": \"\u096f\u096c\u096e\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096c\u096e\u096b - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\"}, {\"id\": \"\u096d\u096d\u096e\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096d\u096e\u096a - \u0905\u0902\u0936 \u091a\u0932\u0928\"}, {\"id\": \"\u096f\u0969\u096b\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0969\u096b\u096a - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u096f\u0967\u096c\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0967\u096c\u096f - \u0938\u0935\u093e\u0930\u0940 \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u0967\u0968\u0969\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0968\u0969\u096d - \u092b\u0948\u0938\u0932\u093e \u092c\u0926\u0930\"}], \"totalCount\": 10, \"nextPageToken\": \"kTYzU2Y2YTMxQzYm1SO2ETYtUjZwITLwADMw0SNjFmNjFDO2QiGBc_shqOEGA89lbICMIBMxIgC\", \"query\": \"sagar thapa\"}}",
+          "structured": true,
+          "ts": "2025-05-06T12:18:15.148037Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details about those selected cases",
+          "ts": "2025-05-06T12:18:52.518089Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Please provide the case IDs or titles of the cases you're interested in. I need that information to provide you with the details.\n",
+          "ts": "2025-05-06T12:18:52.518089Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me laws related to drugs",
+          "ts": "2025-05-06T12:28:25.974349Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I have found 10 cases related to drug laws. Would you like me to search for more, or would you like details on any of these cases?\n",
+          "ts": "2025-05-06T12:28:25.974349Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to drugs",
+          "ts": "2025-05-06T12:29:42.749809Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u0967\u0967\u0966\u096d\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096d\u096a\u0969\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"QZkJTY0MmYzIjM0ETLwMjM50iNwUmMtADMwATLyUWOyQWM4YDJagD1HPOEGA89qbLCLIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T12:29:42.749809Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of the selected cases",
+          "ts": "2025-05-06T12:30:28.406683Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Which cases are you referring to? Please provide the case titles or IDs.\n",
+          "ts": "2025-05-06T12:30:28.406683Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me case related to drugs",
+          "ts": "2025-05-06T12:38:40.230606Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are some cases related to drugs:\n1. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\n2. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\n3. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\n4. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\n5. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\n6. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\n7. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\n8. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\n9. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\n10. \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\n\nWould you like details on any of these cases?\n",
+          "ts": "2025-05-06T12:38:40.230606Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to drugs",
+          "ts": "2025-05-06T12:41:58.232234Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u0967\u0967\u0966\u096d\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096d\u096a\u0969\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"MWZiRmYjljM0IDO10iZ4EjYtY2NzITLwADMw0SZ2ADOkFDO2QiGCsYsbOKEGA89wXJCMIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T12:41:58.232234Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details about the selected cases",
+          "ts": "2025-05-06T12:42:37.258125Z"
+        },
+        {
+          "sender": "bot",
+          "text": "To provide you with the details, please specify which of the listed cases you're interested in. You can refer to them by their '\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902.' and title. For example, you can say \"I want details about \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"\n",
+          "ts": "2025-05-06T12:42:37.258125Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to drugs",
+          "ts": "2025-05-06T13:02:17.654948Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u0967\u0967\u0966\u096d\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096d\u096a\u0969\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"YTOxAzNjJ2MyIDNx0CNyUWYtEDO0ITLwADMw0iMiZzYjFDO2QiGDcbsJiKEGA895jNCMIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T13:02:17.654948Z"
+        },
+        {
+          "sender": "user",
+          "text": "tell me more details about the selected cases",
+          "ts": "2025-05-06T13:02:43.292200Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I need you to specify which cases you are referring to. Please provide the case IDs or titles of the cases you want details on.\n",
+          "ts": "2025-05-06T13:02:43.292200Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me list of cases related to drugs",
+          "ts": "2025-05-06T13:10:43.898628Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0967\u0967\u096a\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u096a\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0907\u0928\u094d\u091c\u0947\u0915\u094d\u0938\u0928)\"}, {\"id\": \"\u096f\u096a\u096b\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u096b\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}], \"totalCount\": 10, \"nextPageToken\": \"AMxQDNjZDZkFmM4MWLkJWM50CZmBjMtADMwATL3IWZwUWM4YDJakT1cGLEGA899PNCLIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T13:10:43.898628Z"
+        },
+        {
+          "sender": "user",
+          "text": "tell me more about the selected cases",
+          "ts": "2025-05-06T13:11:08.624505Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Could you please list the case IDs or titles you'd like to know more about?\n",
+          "ts": "2025-05-06T13:11:08.624505Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me list of cases related to drugs",
+          "ts": "2025-05-06T13:20:53.878494Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0967\u0967\u096a\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0967\u096a\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0907\u0928\u094d\u091c\u0947\u0915\u094d\u0938\u0928)\"}, {\"id\": \"\u096f\u096a\u096b\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u096b\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}], \"totalCount\": 10, \"nextPageToken\": \"wYlJGZiNWOyQjM4UTLmhTMi1iZ3MjMtADMwATL5MDNlRWM4YDJagkpKLOEGAM-CWLCLIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-06T13:20:53.878494Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-07T07:48:28.395459Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hello! How can I assist you today?\n",
+          "ts": "2025-05-07T07:48:28.395459Z"
+        },
+        {
+          "sender": "user",
+          "text": "hi",
+          "ts": "2025-05-07T13:16:41.401919Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Hi there! What legal questions do you have?\n",
+          "ts": "2025-05-07T13:16:41.401919Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843 and 9704",
+          "ts": "2025-05-07T13:47:32.436996Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I apologize, but I'm having trouble processing your request. Please try again.",
+          "ts": "2025-05-07T13:47:32.436996Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843 and 9704",
+          "ts": "2025-05-07T13:53:03.197665Z"
+        },
+        {
+          "sender": "bot",
+          "text": "7843,9704\n",
+          "ts": "2025-05-07T13:53:03.197665Z"
+        }
+      ]
+    },
+    "6e2d07d6": {
+      "sid": "8250361970633474048",
+      "title": "give me details of cases 7843 ",
+      "updatedAt": "2025-05-07T13:56:01.891850Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843 and 9708",
+          "ts": "2025-05-07T13:56:01.891850Z"
+        },
+        {
+          "sender": "bot",
+          "text": "7843,9708\n",
+          "ts": "2025-05-07T13:56:01.891850Z"
+        }
+      ]
+    },
+    "df54e969": {
+      "sid": "4917698246379307008",
+      "title": "give me details of cases 7843 ",
+      "updatedAt": "2025-05-07T14:11:22.711265Z",
+      "log": [
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843 and 9840",
+          "ts": "2025-05-07T14:03:37.518732Z"
+        },
+        {
+          "sender": "bot",
+          "text": "7843,9840\n",
+          "ts": "2025-05-07T14:03:37.518732Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843 and 9840",
+          "ts": "2025-05-07T14:10:19.957613Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the details for the cases you requested:\n\nCase 7843:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096a\u0969 - \u091c\u093e\u0932\u0938\u093e\u091c \u0938\u092e\u0947\u0924\n\nCase 9840: Unable to retrieve information. Case may not exist.\n",
+          "ts": "2025-05-07T14:10:19.957613Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to sagar thapa",
+          "ts": "2025-05-07T14:10:43.951056Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u0967\u0966\u096b\u0968\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u0968\u0969 - \u0930\u093e\u091c\u094d\u092f \u0935\u093f\u0930\u0942\u0926\u094d\u0927\u0915\u094b \u0905\u092a\u0930\u093e\u0927\"}, {\"id\": \"\u0969\u0969\u0968\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u0969\u0968\u096e - \u0928\u093f\u0937\u0947\u0927\u093e\u091c\u094d\u091e\u093e\"}, {\"id\": \"\u0967\u0969\u096b\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0969\u096b\u0966 - \u091c\u093e\u0932\u0938\u093e\u091c\u0940\"}, {\"id\": \"\u0967\u0966\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c - \u0905\u0902\u0936\"}, {\"id\": \"\u096c\u0968\u0968\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u0968\u0968\u096c - \u0915\u0930\u094d\u0924\u0935\u094d\u092f\u091c\u094d\u092f\u093e\u0928 \u0964\"}, {\"id\": \"\u096f\u096c\u096e\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096c\u096e\u096b - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\"}, {\"id\": \"\u096d\u096d\u096e\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096d\u096e\u096a - \u0905\u0902\u0936 \u091a\u0932\u0928\"}, {\"id\": \"\u096f\u0969\u096b\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0969\u096b\u096a - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u096f\u0967\u096c\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u0967\u096c\u096f - \u0938\u0935\u093e\u0930\u0940 \u091c\u094d\u092f\u093e\u0928\"}, {\"id\": \"\u0967\u0968\u0969\u096d\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0968\u0969\u096d - \u092b\u0948\u0938\u0932\u093e \u092c\u0926\u0930\"}], \"totalCount\": 10, \"nextPageToken\": \"gTMkRWZldDN1YGNk1iY0IWYtMjZzITLwADMw0iYjNzM0IDO2QiGBI7ql2MEGAc_8OOCMIBMxIgC\", \"query\": \"sagar thapa\"}}",
+          "structured": true,
+          "ts": "2025-05-07T14:10:43.951056Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details of cases 7843 and 9940",
+          "ts": "2025-05-07T14:11:22.711265Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the details for the cases you requested:\n\nCase 7843:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096e\u096a\u0969 - \u091c\u093e\u0932\u0938\u093e\u091c \u0938\u092e\u0947\u0924\n\nCase 9940:\nTitle: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096f\u096a\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923 / \u092a\u0930\u092e\u093e\u0926\u0947\u0936\n",
+          "ts": "2025-05-07T14:11:22.711265Z"
+        }
+      ]
+    }
+  },
+  "test_user": {
+    "test_conversation": {
+      "log": [
+        {
+          "sender": "user",
+          "text": "Give me details about those selected cases",
+          "ts": "2025-05-06T12:25:17.273905Z"
+        },
+        {
+          "sender": "bot",
+          "text": "",
+          "ts": "2025-05-06T12:25:17.273905Z"
+        },
+        {
+          "sender": "user",
+          "text": "Give me details about these selected cases",
+          "ts": "2025-05-06T12:40:39.522443Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Please provide the case IDs for which you want details. If you have already selected cases from search results, I can proceed with those. Otherwise, select cases first.\n",
+          "ts": "2025-05-06T12:40:39.522443Z"
+        }
+      ],
+      "updatedAt": "2025-05-06T12:40:39.522443Z",
+      "title": "Give me details about those se"
+    },
+    "test_cid": {
+      "log": [
+        {
+          "sender": "user",
+          "text": "tell me about the selected cases",
+          "ts": "2025-05-06T13:04:22.761789Z"
+        },
+        {
+          "sender": "bot",
+          "text": "I apologize, but I'm having trouble processing your request. Please try again.",
+          "ts": "2025-05-06T13:04:22.761789Z"
+        },
+        {
+          "sender": "user",
+          "text": "tell me about the selected cases",
+          "ts": "2025-05-06T13:05:21.818202Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Please select cases from the search results first so I can provide you with the details.\n",
+          "ts": "2025-05-06T13:05:21.818202Z"
+        },
+        {
+          "sender": "user",
+          "text": "tell me about the selected cases",
+          "ts": "2025-05-06T13:08:02.672880Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Please select cases from search results first.\n",
+          "ts": "2025-05-06T13:08:02.672880Z"
+        },
+        {
+          "sender": "user",
+          "text": "tell me about the selected cases",
+          "ts": "2025-05-06T13:08:58.142523Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Please provide the case IDs you'd like information on. Alternatively, you can specify a question you have about the cases.\n",
+          "ts": "2025-05-06T13:08:58.142523Z"
+        }
+      ],
+      "updatedAt": "2025-05-06T13:08:58.142523Z",
+      "title": "tell me about the selected cas",
+      "sid": "5244209219363667968"
     }
   }
 }
