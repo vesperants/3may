@@ -43,6 +43,7 @@ def generate_session_id():
 # Define request models
 class ChatRequest(BaseModel):
     message: str
+    selected_case_ids: Optional[List[str]] = None
     
 class SearchRequest(BaseModel):
     query: str
@@ -170,9 +171,38 @@ async def chat(request: ChatRequest):
     """Chat endpoint to interact with the agent."""
     try:
         user_message = request.message
-        # Add your agent logic here
-        agent_response = "This is a placeholder response"
-        return {"reply": agent_response}
+        selected_case_ids = request.selected_case_ids
+        
+        # More detailed logging of the request
+        logger.info(f"Chat request: message='{user_message}'")
+        if selected_case_ids:
+            logger.info(f"Chat request with {len(selected_case_ids)} selected cases: {selected_case_ids}")
+        else:
+            logger.info("Chat request with NO selected case IDs")
+        
+        # Import the root_agent routing function
+        try:
+            from root_agent import route_to_agent
+            
+            # Generate a user_id and session_id if needed
+            # For simplicity, we're using UUIDs but in production you'd use persistent IDs
+            user_id = str(uuid.uuid4())
+            session_id = str(uuid.uuid4())
+            
+            # Route the message to the appropriate agent
+            logger.info(f"Calling route_to_agent with selected_case_ids: {selected_case_ids}")
+            agent_response = route_to_agent(
+                user_id=user_id, 
+                session_id=session_id,
+                message=user_message,
+                selected_case_ids=selected_case_ids
+            )
+            logger.info(f"Got response of length {len(agent_response) if agent_response else 0}")
+            
+            return {"reply": agent_response}
+        except ImportError as e:
+            logger.error(f"Failed to import route_to_agent: {e}")
+            return {"reply": "I'm sorry, the agent system is currently unavailable."}
     except Exception as e:
         logger.exception(f"Error in chat endpoint: {e}")
         raise HTTPException(status_code=500, detail=str(e))

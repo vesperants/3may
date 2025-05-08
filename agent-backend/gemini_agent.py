@@ -128,53 +128,54 @@ def chat(uid: str, cid: str, msg: str, selected_case_ids: list = None) -> str:
     if selected_case_ids and len(selected_case_ids) > 0:
         log.info(f"Received {len(selected_case_ids)} selected case IDs: {selected_case_ids}")
         
-        # If this is a request for details about selected cases, handle it directly
-        if "selected cases" in msg.lower() or "details" in msg.lower():
-            log.info("=============== DIRECT HANDLING DEBUG ===============")
-            log.info(f"Detected request for case details in message: '{msg}'")
-            log.info(f"Selected case IDs available: {selected_case_ids}")
-            log.info("===================================================")
-            
-            log.info("Direct handling of case details request")
-            try:
-                # Import the case_details_tool directly
-                log.info("Importing case_details_tool...")
-                from agents.case_details_agent import case_details_tool
-                
-                # Call the tool directly with the selected case IDs
-                log.info(f"Calling case_details_tool with case_ids={selected_case_ids}...")
-                result = case_details_tool(
-                    question=f"Provide detailed information about these cases: {msg}",
-                    case_ids=selected_case_ids
-                )
-                
-                if result:
-                    log.info(f"Successfully processed details for {len(selected_case_ids)} cases")
-                    log.info(f"Result length: {len(result)} characters")
-                    log.info(f"First 100 chars of result: {result[:100]}...")
-                    
-                    # Check if this is a markdown response that needs to be wrapped
-                    if result.startswith("# Case Details"):
-                        log.info("Wrapping case details response in structured JSON format")
-                        # Create a structured response with type CASE_DETAILS
-                        structured_response = {
-                            "type": "CASE_DETAILS",
-                            "text": "Case details information",
-                            "data": {
-                                "content": result,
-                                "case_ids": selected_case_ids
-                            }
-                        }
-                        return json.dumps(structured_response)
-                    
-                    return result
-                else:
-                    log.warning("No result from direct case_details_tool call")
-            except Exception as e:
-                log.exception(f"Error calling case_details_tool directly: {e}")
-        else:
-            log.info("Selected case IDs provided but not a details request")
-    
+        # # COMMENTED OUT: Let route_to_agent handle selected cases delegation instead
+        # # If this is a request for details about selected cases, handle it directly
+        # if "selected cases" in msg.lower() or "details" in msg.lower():
+        #     log.info("=============== DIRECT HANDLING DEBUG ===============")
+        #     log.info(f"Detected request for case details in message: '{msg}'")
+        #     log.info(f"Selected case IDs available: {selected_case_ids}")
+        #     log.info("===================================================")
+        #     
+        #     log.info("Direct handling of case details request")
+        #     try:
+        #         # Import the case_details_tool directly
+        #         log.info("Importing case_details_tool...")
+        #         from agents.case_details_agent import case_details_tool
+        #         
+        #         # Call the tool directly with the selected case IDs
+        #         log.info(f"Calling case_details_tool with case_ids={selected_case_ids}...")
+        #         result = case_details_tool(
+        #             question=f"Provide detailed information about these cases: {msg}",
+        #             case_ids=selected_case_ids
+        #         )
+        #         
+        #         if result:
+        #             log.info(f"Successfully processed details for {len(selected_case_ids)} cases")
+        #             log.info(f"Result length: {len(result)} characters")
+        #             log.info(f"First 100 chars of result: {result[:100]}...")
+        #             
+        #             # Check if this is a markdown response that needs to be wrapped
+        #             if result.startswith("# Case Details"):
+        #                 log.info("Wrapping case details response in structured JSON format")
+        #                 # Create a structured response with type CASE_DETAILS
+        #                 structured_response = {
+        #                     "type": "CASE_DETAILS",
+        #                     "text": "Case details information",
+        #                     "data": {
+        #                         "content": result,
+        #                         "case_ids": selected_case_ids
+        #                     }
+        #                 }
+        #                 return json.dumps(structured_response)
+        #             
+        #             return result
+        #         else:
+        #             log.warning("No result from direct case_details_tool call")
+        #     except Exception as e:
+        #         log.exception(f"Error calling case_details_tool directly: {e}")
+        # else:
+        #     log.info("Selected case IDs provided but not a details request")
+
     # ---- send to agent ----------------------------------------------------
     reply = "Agent did not reply."
     
