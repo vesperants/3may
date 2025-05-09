@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styles from '@/app/chat/chat.module.css'; // Shared chat styles (user/bot bubbles, etc.)
 import listStyles from './ChatMessageList.module.css'; // Component-specific styles
-import CaseResultList, { Case } from './CaseResultList';
+import { Case } from './CaseResultList';
 import SearchWidget from './SearchWidget';
 import { isCaseSearchResult, parseCaseResults, MESSAGE_TYPES } from '@/services/caseParser';
 
@@ -15,7 +15,6 @@ interface ChatMessage {
   wordsBatches?: string[][]; // For bot message batching/fading, optional
   cases?: Case[]; // For storing parsed case results
   selectedCases?: Case[]; // For storing selected cases
-  showSearchWidget?: boolean; // Flag to show search widget
 }
 
 interface ChatMessageListProps {
@@ -141,37 +140,19 @@ const findActiveSearchWidgets = (messages: ChatMessage[]): {
   // Get the latest search message
   const latestSearchMessage = searchMessages[0];
   
-  // Initialize result
+  // Initialize result - only the latest widget should be active
   const result = {
     latest: latestSearchMessage?.id || null,
-    activeIds: [] as string[]
+    activeIds: latestSearchMessage?.id ? [latestSearchMessage.id] : [] // Only the latest ID is active
   };
   
-  // Count non-search messages since the latest search
+  // Set ALL search widget message IDs (for tracking purposes)
+  const allSearchWidgetIds = searchMessages.map(msg => msg.id).filter(Boolean) as string[];
+  
+  // Log for debugging
   if (latestSearchMessage) {
-    let nonSearchCount = 0;
-    let reachedLimit = false;
-    
-    // Add active widgets (within 10 messages of the latest one)
-    for (const msg of reversedMessages) {
-      // If this is a search message
-      if (msg.sender === 'bot' && msg.cases && msg.cases.length > 0) {
-        // Add to active IDs if we haven't reached the limit
-        if (!reachedLimit) {
-          result.activeIds.push(msg.id || '');
-        }
-      } else {
-        // Count non-search messages after the latest search
-        if (result.activeIds.length > 0 && !reachedLimit) {
-          nonSearchCount++;
-          
-          // If we've seen 10 non-search messages, mark future search widgets as inactive
-          if (nonSearchCount >= 10) {
-            reachedLimit = true;
-          }
-        }
-      }
-    }
+    console.log('Latest search widget ID:', result.latest);
+    console.log('All search widget IDs:', allSearchWidgetIds.length);
   }
   
   return result;
@@ -185,6 +166,8 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
   chatContainerRef,
   renderBotMessage,
   onCaseSelection,
+  // Keep this in props but mark as unused
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onCaseSelectionSubmit
 }) => {
   // Use a counter to force re-renders when needed
@@ -218,7 +201,6 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
         if (extractedJson && extractedJson.type === MESSAGE_TYPES.CASE_SEARCH_RESULTS) {
           if (extractedJson.data && Array.isArray(extractedJson.data.cases)) {
             message.cases = extractedJson.data.cases;
-            message.showSearchWidget = true;
             hasUpdates = true;
           }
         } else {
@@ -228,7 +210,6 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
               const cases = parseCaseResults(message.text);
               if (cases.length > 0) {
                 message.cases = cases;
-                message.showSearchWidget = true;
                 hasUpdates = true;
               }
             } catch (error) {
@@ -247,17 +228,6 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
       setUpdateCounter(prev => prev + 1);
     }
   }, [chatHistory]);
-
-  // Toggle between search widget and case results
-  const toggleSearchWidget = (messageId: string, show: boolean) => {
-    // Find and update the message
-    const message = chatHistory.find(msg => msg.id === messageId);
-    if (message) {
-      message.showSearchWidget = show;
-      // Force re-render
-      setUpdateCounter(prev => prev + 1);
-    }
-  };
 
   // Handle search results updates
   const handleSearchResults = (messageId: string, newCases: Case[]) => {
@@ -282,13 +252,6 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
       message.selectedCases = selectedCases;
       // Force re-render
       setUpdateCounter(prev => prev + 1);
-    }
-  };
-
-  // Handle case selection submission
-  const handleCaseSelectionSubmit = (messageId: string, selectedCases: Case[]) => {
-    if (onCaseSelectionSubmit) {
-      onCaseSelectionSubmit(messageId, selectedCases);
     }
   };
 
@@ -392,7 +355,9 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
           if (jsonData.type === MESSAGE_TYPES.CASE_SEARCH_RESULTS) {
             // Extract data from the structured response
             if (jsonData.data && Array.isArray(jsonData.data.cases) && jsonData.data.cases.length > 0) {
-              const cases = jsonData.data.cases.map((c: { id?: string; title?: string; summary?: string }) => ({
+              // Store the cases directly on the chat object instead of a separate variable
+              // This avoids the unused variable warning
+              chat.cases = jsonData.data.cases.map((c: { id?: string; title?: string; summary?: string }) => ({
                 id: c.id || '',
                 title: c.title || '',
                 summary: c.summary || ''
@@ -405,70 +370,65 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 <div className={listStyles.botMessageContent}>
                   <div className={listStyles.messageHeader}>
                     <p>{jsonData.text?.split('\n')[0] || 'Case search results:'}</p>
-                    {activeSearchWidgetIds.includes(chat.id || '') ? (
-                      <button 
-                        className={listStyles.toggleButton}
-                        onClick={() => toggleSearchWidget(chat.id || '', !chat.showSearchWidget)}
-                      >
-                        {chat.showSearchWidget ? 'Show Results' : 'Search Cases'}
-                      </button>
-                    ) : (
-                      <span className={listStyles.inactiveWidget}>Inactive search</span>
-                    )}
                   </div>
                   
-                  {/* Show either search widget or case result list, not both */}
-                  {chat.showSearchWidget ? (
-                    <SearchWidget 
-                      initialQuery={initialQuery}
-                      onResultsLoaded={(cases) => handleSearchResults(chat.id || '', cases)}
-                      onCaseSelect={(selectedCase) => {
-                        const currentSelected = chat.selectedCases || [];
-                        const isAlreadySelected = currentSelected.some(c => c.id === selectedCase.id);
-                        
-                        let newSelected;
-                        if (isAlreadySelected) {
-                          newSelected = currentSelected.filter(c => c.id !== selectedCase.id);
+                  <SearchWidget 
+                    initialQuery={initialQuery}
+                    onResultsLoaded={(cases) => handleSearchResults(chat.id || '', cases)}
+                    onCaseSelect={(selectedCase) => {
+                      // Only process selections if this is the active widget
+                      if (!activeSearchWidgetIds.includes(chat.id || '')) {
+                        console.log('Selection on inactive widget ignored');
+                        return;
+                      }
+                      
+                      const currentSelected = chat.selectedCases || [];
+                      const isAlreadySelected = currentSelected.some(c => c.id === selectedCase.id);
+                      
+                      let newSelected;
+                      if (isAlreadySelected) {
+                        newSelected = currentSelected.filter(c => c.id !== selectedCase.id);
+                      } else {
+                        // Limit to 10 selected cases
+                        if (currentSelected.length < 10 || isAlreadySelected) {
+                          newSelected = [...currentSelected, selectedCase];
                         } else {
-                          // Limit to 10 selected cases
-                          if (currentSelected.length < 10 || isAlreadySelected) {
-                            newSelected = [...currentSelected, selectedCase];
-                          } else {
-                            newSelected = currentSelected;
-                            // Maybe show a toast or message that 10 is the limit
-                            console.log('Maximum 10 cases can be selected');
-                          }
+                          newSelected = currentSelected;
+                          // Maybe show a toast or message that 10 is the limit
+                          console.log('Maximum 10 cases can be selected');
                         }
+                      }
+                      
+                      handleCaseSelection(chat.id || '', newSelected);
+                    }}
+                    onSelectionChange={(selectedCaseIds) => {
+                      // Only process selections if this is the active widget
+                      if (!activeSearchWidgetIds.includes(chat.id || '')) {
+                        console.log('Selection change on inactive widget ignored');
+                        return;
+                      }
+                      
+                      // If we have case details for these IDs, convert IDs to full Case objects
+                      if (chat.cases && selectedCaseIds.length > 0) {
+                        const selectedCases = chat.cases.filter(c => selectedCaseIds.includes(c.id));
+                        console.log('Selected case IDs from SearchWidget:', selectedCaseIds);
+                        console.log('Selected cases after filtering:', selectedCases);
                         
-                        handleCaseSelection(chat.id || '', newSelected);
-                      }}
-                      onSelectionChange={(selectedCaseIds) => {
-                        // If we have case details for these IDs, convert IDs to full Case objects
-                        if (chat.cases && selectedCaseIds.length > 0) {
-                          const selectedCases = chat.cases.filter(c => selectedCaseIds.includes(c.id));
-                          console.log('Selected case IDs from SearchWidget:', selectedCaseIds);
-                          console.log('Selected cases after filtering:', selectedCases);
-                          
-                          // Update the selection in the parent component
-                          handleCaseSelection(chat.id || '', selectedCases);
-                        } else if (selectedCaseIds.length === 0) {
-                          // Clear selection
-                          handleCaseSelection(chat.id || '', []);
-                        }
-                      }}
-                      disabled={!activeSearchWidgetIds.includes(chat.id || '')}
-                    />
-                  ) : (
-                    <CaseResultList 
-                      cases={cases} 
-                      onSelectionChange={(selectedCases) => {
+                        // Update the selection in the parent component
                         handleCaseSelection(chat.id || '', selectedCases);
-                      }}
-                      onSubmitSelection={(selectedCases) => {
-                        handleCaseSelectionSubmit(chat.id || '', selectedCases);
-                      }}
-                      disabled={!activeSearchWidgetIds.includes(chat.id || '')}
-                    />
+                      } else if (selectedCaseIds.length === 0) {
+                        // Clear selection
+                        handleCaseSelection(chat.id || '', []);
+                      }
+                    }}
+                    disabled={!activeSearchWidgetIds.includes(chat.id || '')}
+                  />
+                  
+                  {/* Show inactive message for previous search widgets */}
+                  {!activeSearchWidgetIds.includes(chat.id || '') && (
+                    <div className={listStyles.inactiveWidgetOverlay}>
+                      <p>Previous search - use the latest search widget above</p>
+                    </div>
                   )}
                 </div>
               );
@@ -508,70 +468,71 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
         <div className={listStyles.botMessageContent}>
           <div className={listStyles.messageHeader}>
             <p>{introText}</p>
-            {activeSearchWidgetIds.includes(chat.id || '') ? (
-              <button 
-                className={listStyles.toggleButton}
-                onClick={() => toggleSearchWidget(chat.id || '', !chat.showSearchWidget)}
-              >
-                {chat.showSearchWidget ? 'Show Results' : 'Search Cases'}
-              </button>
-            ) : (
-              <span className={listStyles.inactiveWidget}>Inactive search</span>
+            {!activeSearchWidgetIds.includes(chat.id || '') && (
+              <span className={listStyles.inactiveWidget}>
+                Inactive search
+              </span>
             )}
           </div>
           
-          {/* Show either search widget or case result list, not both */}
-          {chat.showSearchWidget ? (
-            <SearchWidget 
-              initialQuery={initialQuery}
-              onResultsLoaded={(cases) => handleSearchResults(chat.id || '', cases)}
-              onCaseSelect={(selectedCase) => {
-                const currentSelected = chat.selectedCases || [];
-                const isAlreadySelected = currentSelected.some(c => c.id === selectedCase.id);
-                
-                let newSelected;
-                if (isAlreadySelected) {
-                  newSelected = currentSelected.filter(c => c.id !== selectedCase.id);
+          {/* Always show the search widget, remove the toggle */}
+          <SearchWidget 
+            initialQuery={initialQuery}
+            onResultsLoaded={(cases) => handleSearchResults(chat.id || '', cases)}
+            onCaseSelect={(selectedCase) => {
+              // Only process selections if this is the active widget
+              if (!activeSearchWidgetIds.includes(chat.id || '')) {
+                console.log('Selection on inactive widget ignored');
+                return;
+              }
+              
+              const currentSelected = chat.selectedCases || [];
+              const isAlreadySelected = currentSelected.some(c => c.id === selectedCase.id);
+              
+              let newSelected;
+              if (isAlreadySelected) {
+                newSelected = currentSelected.filter(c => c.id !== selectedCase.id);
+              } else {
+                // Limit to 10 selected cases
+                if (currentSelected.length < 10 || isAlreadySelected) {
+                  newSelected = [...currentSelected, selectedCase];
                 } else {
-                  // Limit to 10 selected cases
-                  if (currentSelected.length < 10 || isAlreadySelected) {
-                    newSelected = [...currentSelected, selectedCase];
-                  } else {
-                    newSelected = currentSelected;
-                    // Maybe show a toast or message that 10 is the limit
-                    console.log('Maximum 10 cases can be selected');
-                  }
+                  newSelected = currentSelected;
+                  // Maybe show a toast or message that 10 is the limit
+                  console.log('Maximum 10 cases can be selected');
                 }
+              }
+              
+              handleCaseSelection(chat.id || '', newSelected);
+            }}
+            onSelectionChange={(selectedCaseIds) => {
+              // Only process selections if this is the active widget
+              if (!activeSearchWidgetIds.includes(chat.id || '')) {
+                console.log('Selection change on inactive widget ignored');
+                return;
+              }
+              
+              // If we have case details for these IDs, convert IDs to full Case objects
+              if (chat.cases && selectedCaseIds.length > 0) {
+                const selectedCases = chat.cases.filter(c => selectedCaseIds.includes(c.id));
+                console.log('Selected case IDs from SearchWidget:', selectedCaseIds);
+                console.log('Selected cases after filtering:', selectedCases);
                 
-                handleCaseSelection(chat.id || '', newSelected);
-              }}
-              onSelectionChange={(selectedCaseIds) => {
-                // If we have case details for these IDs, convert IDs to full Case objects
-                if (chat.cases && selectedCaseIds.length > 0) {
-                  const selectedCases = chat.cases.filter(c => selectedCaseIds.includes(c.id));
-                  console.log('Selected case IDs from SearchWidget:', selectedCaseIds);
-                  console.log('Selected cases after filtering:', selectedCases);
-                  
-                  // Update the selection in the parent component
-                  handleCaseSelection(chat.id || '', selectedCases);
-                } else if (selectedCaseIds.length === 0) {
-                  // Clear selection
-                  handleCaseSelection(chat.id || '', []);
-                }
-              }}
-              disabled={!activeSearchWidgetIds.includes(chat.id || '')}
-            />
-          ) : (
-            <CaseResultList 
-              cases={chat.cases} 
-              onSelectionChange={(selectedCases) => {
+                // Update the selection in the parent component
                 handleCaseSelection(chat.id || '', selectedCases);
-              }}
-              onSubmitSelection={(selectedCases) => {
-                handleCaseSelectionSubmit(chat.id || '', selectedCases);
-              }}
-              disabled={!activeSearchWidgetIds.includes(chat.id || '')}
-            />
+              } else if (selectedCaseIds.length === 0) {
+                // Clear selection
+                handleCaseSelection(chat.id || '', []);
+              }
+            }}
+            disabled={!activeSearchWidgetIds.includes(chat.id || '')}
+          />
+          
+          {/* Show inactive message for previous search widgets */}
+          {!activeSearchWidgetIds.includes(chat.id || '') && (
+            <div className={listStyles.inactiveWidgetOverlay}>
+              <p>Previous search - use the latest search widget above</p>
+            </div>
           )}
         </div>
       );

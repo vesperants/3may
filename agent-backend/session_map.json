@@ -959,7 +959,7 @@
     "c801de92": {
       "sid": "7910762411232067584",
       "title": "give me details about case 744",
-      "updatedAt": "2025-05-09T07:44:22.899238Z",
+      "updatedAt": "2025-05-09T07:56:10.646009Z",
       "log": [
         {
           "sender": "user",
@@ -1094,6 +1094,37 @@
           "sender": "bot",
           "text": "# Case Details\n\n## Case Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096a\u0966\u0968 - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here. (Case ID: \u0969\u096a\u0966\u0968)\n\nCase Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0969\u096a\u0966\u0968 - \u0915\u0930\u094d\u0924\u0935\u094d\u092f \u091c\u094d\u092f\u093e\u0928\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here.\n\n---\n\n## Case Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u0967\u096d\u0969 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here. (Case ID: \u0967\u0966\u0967\u096d\u0969)\n\nCase Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u0967\u096d\u0969 - \u091c\u092c\u0930\u091c\u0938\u094d\u0924\u0940 \u0915\u0930\u0923\u0940\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here.\n\n---\n\n",
           "ts": "2025-05-09T07:44:22.899238Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me cases related to drugs",
+          "ts": "2025-05-09T07:54:50.854443Z"
+        },
+        {
+          "sender": "bot",
+          "text": "{\"type\": \"CASE_SEARCH_RESULTS\", \"text\": \"Here are the cases related to your search:\", \"data\": {\"status\": \"success\", \"cases\": [{\"id\": \"\u096f\u096d\u0966\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\"}, {\"id\": \"\u0967\u0966\u096b\u096f\u096e\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096f\u096e - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0921\u093e\u0907\u091c\u0947\u092a\u093e\u092e \u0924\u0925\u093e \u0928\u093e\u0907\u091f\u094d\u0930\u094b\u092d\u0947\u091f\u0938\u092e\u0947\u0924)\"}, {\"id\": \"\u0967\u0967\u0966\u096b\u096f\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096b\u096f - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0916\u0948\u0930\u094b \u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096f\u096a\u0966\u0966\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\"}, {\"id\": \"\u096d\u0967\u096d\u096b\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u0967\u096d\u096b - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u091f\u093f\u0921\u093f\u091c\u0947\u0938\u093f\u0915 \u0935\u0941\u092a\u094d\u0930\u093f\u0928\u0930)\"}, {\"id\": \"\u096f\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0905\u092b\u093f\u092e)\"}, {\"id\": \"\u0967\u0966\u096b\u096e\u0969\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096b\u096e\u0969 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u092c\u093f\u0915\u094d\u0930\u0940 \u0935\u093f\u0924\u0930\u0923\"}, {\"id\": \"\u096a\u0968\u0969\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096a\u0968\u0969\u096a - \u0932\u093e\u0917\u0942 \u0914\u0937\u0927\"}, {\"id\": \"\u0967\u0967\u0966\u096d\u096a\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0967\u0966\u096d\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 (\u0939\u0947\u0930\u094b\u0907\u0928)\"}, {\"id\": \"\u096d\u096a\u0969\u096c\", \"title\": \"\u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096d\u096a\u0969\u096c - \u0932\u093e\u0917\u0942\u0914\u0937\u0927 \u0964\"}], \"totalCount\": 10, \"nextPageToken\": \"QOldzYjZjNxEDNjZWLygjZh1SNjBjMtADMwATL5UmZjVWM4YDJa8AqfrIEGEshSrMCLIBMxIgC\", \"query\": \"drugs\"}}",
+          "structured": true,
+          "ts": "2025-05-09T07:54:50.854443Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me details related to those selected cases",
+          "ts": "2025-05-09T07:55:34.489320Z"
+        },
+        {
+          "sender": "bot",
+          "text": "# Case Details\n\n## Case Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here. (Case ID: \u096f\u096d\u0966\u096a)\n\nCase Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096d\u0966\u096a - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0916\u0948\u0930\u094b \u0939\u093f\u0930\u094b\u0907\u0928 \u0964\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here.\n\n---\n\n## Case Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here. (Case ID: \u096f\u096a\u0966\u0966)\n\nCase Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096f\u096a\u0966\u0966 - \u0932\u093e\u0917\u0941 \u0914\u0937\u0927 \u0938\u0947\u0924\u094b \u0939\u0947\u0930\u094b\u0907\u0928\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here.\n\n---\n\n",
+          "ts": "2025-05-09T07:55:34.489320Z"
+        },
+        {
+          "sender": "user",
+          "text": "give me case details related to case number 6400 and 10673",
+          "ts": "2025-05-09T07:56:10.646009Z"
+        },
+        {
+          "sender": "bot",
+          "text": "Here are the details for cases 6400 and 10673:\n\n**Case ID: 6400**\nCase Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u096c\u096a\u0966\u0966 - \u0909\u0924\u094d\u092a\u094d\u0930\u0947\u0937\u0923\u092f\u0941\u0915\u094d\u0924 \u092a\u0930\u092e\u093e\u0926\u0947\u0936\u0915\u094b \u0906\u0926\u0947\u0936 \u091c\u093e\u0930\u0940 \u0917\u0930\u0940\u092a\u093e\u0909\u0901 \u0964\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here.\n\n**Case ID: 10673**\nCase Title: \u0928\u093f\u0930\u094d\u0923\u092f \u0928\u0902. \u0967\u0966\u096c\u096d\u0969 - \u0939\u0915\u0938\u092b\u093e \u0917\u0930\u093f\u092a\u093e\u090a\u0901\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here.\n",
+          "ts": "2025-05-09T07:56:10.646009Z"
         }
       ]
     }

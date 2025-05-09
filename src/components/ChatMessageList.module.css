@@ -81,6 +81,7 @@
   flex-direction: column;
   width: 100%;
   min-width: 300px; /* Ensure reasonable minimum width for case lists */
+  position: relative; /* Add this for the overlay positioning context */
 }
   
 .botMessageContent p {
@@ -132,6 +133,33 @@
   padding: 3px 8px;
   border-radius: 4px;
   border: 1px solid #ddd;
+}
+
+/* Inactive widget overlay - shows a semi-transparent overlay with a message */
+.inactiveWidgetOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(240, 240, 240, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 6px;
+  backdrop-filter: blur(2px);
+  margin-top: 10px;
+}
+
+.inactiveWidgetOverlay p {
+  background-color: white;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Case Details Styling */
