@@ -6,6 +6,7 @@ interface SearchWidgetProps {
   initialQuery?: string;
   onResultsLoaded?: (cases: Case[]) => void;
   onCaseSelect?: (selectedCase: Case) => void;
+  onSelectionChange?: (selectedCaseIds: string[]) => void;
   disabled?: boolean;
 }
 
@@ -13,6 +14,7 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
   initialQuery = "", 
   onResultsLoaded,
   onCaseSelect,
+  onSelectionChange,
   disabled = false
 }) => {
   const [results, setResults] = useState<Case[]>([]);
@@ -21,6 +23,10 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
   const [totalResults, setTotalResults] = useState(0);
   const [pageToken, setPageToken] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(false);
+  const [selectedCases, setSelectedCases] = useState<Set<string>>(new Set());
+  
+  // Use a ref to track previous selection to prevent infinite loops
+  const prevSelectionRef = useRef<string[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -37,6 +43,26 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
       fetchResults({ append: false });
     }
   }, [initialQuery]);
+
+  // Notify parent component when selected cases change, but only if different
+  useEffect(() => {
+    if (onSelectionChange) {
+      const currentSelection = Array.from(selectedCases);
+      const prevSelection = prevSelectionRef.current;
+      
+      // Check if the selection has actually changed
+      const isDifferent = 
+        currentSelection.length !== prevSelection.length || 
+        currentSelection.some(id => !prevSelection.includes(id));
+      
+      if (isDifferent) {
+        // Update the previous selection ref
+        prevSelectionRef.current = currentSelection;
+        // Notify parent
+        onSelectionChange(currentSelection);
+      }
+    }
+  }, [selectedCases, onSelectionChange]);
 
   // Fetch search results from API
   const fetchResults = useCallback(
@@ -93,6 +119,29 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
     fetchResults({ append: false });
   };
 
+  // Handle case selection toggle
+  const toggleCaseSelection = (result: Case) => {
+    if (!disabled) {
+      setSelectedCases(prev => {
+        const newSelection = new Set(prev);
+        if (newSelection.has(result.id)) {
+          newSelection.delete(result.id);
+        } else {
+          newSelection.add(result.id);
+        }
+        return newSelection;
+      });
+      
+      // Also call the single case selection callback if provided
+      if (onCaseSelect) {
+        onCaseSelect(result);
+      }
+      
+      // Log the selected cases for debugging
+      console.log(`Case ${result.id} selection toggled`);
+    }
+  };
+
   // Infinite scroll event
   useEffect(() => {
     const onScroll = () => {
@@ -144,11 +193,18 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
         </button>
       </form>
 
-      {/* Results Count */}
+      {/* Results Count and Selection Info */}
       {input && !isLoading && results.length > 0 && (
-        <div className={styles.resultsCount}>
-          Showing {results.length}
-          {totalResults ? ` of ${totalResults}` : ""} results
+        <div className={styles.resultsInfo}>
+          <div className={styles.resultsCount}>
+            Showing {results.length}
+            {totalResults ? ` of ${totalResults}` : ""} results
+          </div>
+          {selectedCases.size > 0 && (
+            <div className={styles.selectionCount}>
+              {selectedCases.size} case{selectedCases.size !== 1 ? 's' : ''} selected
+            </div>
+          )}
         </div>
       )}
 
@@ -172,8 +228,8 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
         {results.map((result) => (
           <div
             key={result.id}
-            className={styles.resultItem}
-            onClick={() => !disabled && onCaseSelect && onCaseSelect(result)}
+            className={`${styles.resultItem} ${selectedCases.has(result.id) ? styles.selected : ''}`}
+            onClick={() => toggleCaseSelection(result)}
           >
             <div className={styles.resultTitle} title={result.title}>
               {result.title}
@@ -183,9 +239,10 @@ const SearchWidget: React.FC<SearchWidgetProps> = ({
                 type="checkbox"
                 className={styles.checkbox}
                 disabled={disabled}
+                checked={selectedCases.has(result.id)}
                 onChange={(e) => {
                   e.stopPropagation();
-                  if (!disabled && onCaseSelect) onCaseSelect(result);
+                  toggleCaseSelection(result);
                 }}
               />
             </div>

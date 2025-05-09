@@ -8,6 +8,7 @@ import logging
 import os
 import uuid
 from tools.case_search_tool import case_search_tool
+import json
 
 # Configure logging
 logging.basicConfig(
@@ -173,12 +174,26 @@ async def chat(request: ChatRequest):
         user_message = request.message
         selected_case_ids = request.selected_case_ids
         
-        # More detailed logging of the request
+        # Enhanced logging for selected case IDs
         logger.info(f"Chat request: message='{user_message}'")
         if selected_case_ids:
-            logger.info(f"Chat request with {len(selected_case_ids)} selected cases: {selected_case_ids}")
+            logger.info(f"===== SELECTED CASES =====")
+            logger.info(f"User selected {len(selected_case_ids)} cases:")
+            for i, case_id in enumerate(selected_case_ids):
+                logger.info(f"  {i+1}. Selected Case ID: {case_id}")
+            logger.info(f"===========================")
         else:
             logger.info("Chat request with NO selected case IDs")
+        
+        # Handle empty message
+        if not user_message or user_message.strip() == "":
+            if selected_case_ids and len(selected_case_ids) > 0:
+                # If no message but selected case IDs, create a default message
+                user_message = "Tell me about these selected cases"
+                logger.info(f"Empty message with selected cases - using default: '{user_message}'")
+            else:
+                # Empty message with no selected cases
+                return {"reply": "Please enter a message or question."}
         
         # Import the root_agent routing function
         try:
@@ -189,17 +204,27 @@ async def chat(request: ChatRequest):
             user_id = str(uuid.uuid4())
             session_id = str(uuid.uuid4())
             
+            # Normalize selected_case_ids to avoid None
+            selected_ids = selected_case_ids if selected_case_ids else []
+            
             # Route the message to the appropriate agent
-            logger.info(f"Calling route_to_agent with selected_case_ids: {selected_case_ids}")
+            logger.info(f"Calling route_to_agent with user_id={user_id[:8]}..., session_id={session_id[:8]}..., selected_case_ids={selected_ids}")
             agent_response = route_to_agent(
                 user_id=user_id, 
                 session_id=session_id,
                 message=user_message,
-                selected_case_ids=selected_case_ids
+                selected_case_ids=selected_ids
             )
             logger.info(f"Got response of length {len(agent_response) if agent_response else 0}")
             
-            return {"reply": agent_response}
+            # Check if it's a JSON response (for search results)
+            try:
+                # If the response is valid JSON, pass it through as is
+                json_response = json.loads(agent_response)
+                return {"reply": agent_response, "is_json": True}
+            except (json.JSONDecodeError, TypeError):
+                # Not JSON, return as normal text response
+                return {"reply": agent_response}
         except ImportError as e:
             logger.error(f"Failed to import route_to_agent: {e}")
             return {"reply": "I'm sorry, the agent system is currently unavailable."}

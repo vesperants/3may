@@ -45,6 +45,7 @@ def retrieve_case_title(
 
 def najir_expert_tool(
     case_number: str,
+    question: str = "",
     project_id: str = PROJECT_ID,
     location: str = LOCATION_ID,
     engine_id: str = ENGINE_ID
@@ -54,14 +55,41 @@ def najir_expert_tool(
     
     Args:
         case_number (str): The case number to search for
+        question (str, optional): Question about the case for context
         project_id (str, optional): Google Cloud project ID
         location (str, optional): Location for Discovery Engine
         engine_id (str, optional): Discovery Engine ID
         
     Returns:
-        str: The title of the case if found, empty string if not found
+        str: Case information if found, empty string if not found
     """
-    title = retrieve_case_title(case_number, project_id, location, engine_id)
-    if not title:
-        return ""  # Empty string signifies "not found"
-    return title 
+    # Clean up the case number (remove spaces, ensure proper format)
+    case_number = case_number.strip()
+    
+    # Try to retrieve the case title and details
+    try:
+        # First try direct lookup with the case number as provided
+        title = retrieve_case_title(case_number, project_id, location, engine_id)
+        
+        # If not found with original format, try with converted Devanagari format
+        if not title:
+            # Convert Arabic numerals to Devanagari if possible
+            nepali_number = arabic_to_devanagari(case_number)
+            if nepali_number != case_number:  # Only try if conversion actually changed something
+                title = retrieve_case_title(nepali_number, project_id, location, engine_id)
+        
+        # If still not found, try a more flexible search
+        if not title:
+            # This is a placeholder for more advanced search logic
+            # You might want to implement a fuzzy search or other techniques here
+            return f"Case information not found for case number {case_number}."
+        
+        # For now, we're just returning the title
+        # In a full implementation, you would retrieve and return more case details
+        return f"Case Title: {title}\n\nThis is a simplified version of the case information. In a complete implementation, more details would be provided here."
+    
+    except Exception as e:
+        import traceback
+        error_details = traceback.format_exc()
+        print(f"Error in najir_expert_tool: {error_details}")
+        return f"An error occurred while retrieving case information: {str(e)}" 

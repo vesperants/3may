@@ -442,6 +442,20 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
                         
                         handleCaseSelection(chat.id || '', newSelected);
                       }}
+                      onSelectionChange={(selectedCaseIds) => {
+                        // If we have case details for these IDs, convert IDs to full Case objects
+                        if (chat.cases && selectedCaseIds.length > 0) {
+                          const selectedCases = chat.cases.filter(c => selectedCaseIds.includes(c.id));
+                          console.log('Selected case IDs from SearchWidget:', selectedCaseIds);
+                          console.log('Selected cases after filtering:', selectedCases);
+                          
+                          // Update the selection in the parent component
+                          handleCaseSelection(chat.id || '', selectedCases);
+                        } else if (selectedCaseIds.length === 0) {
+                          // Clear selection
+                          handleCaseSelection(chat.id || '', []);
+                        }
+                      }}
                       disabled={!activeSearchWidgetIds.includes(chat.id || '')}
                     />
                   ) : (
@@ -461,7 +475,10 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
             }
           }
         }
-      } catch (error) {
+      } catch (
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        parseError
+      ) {
         // Not valid JSON or doesn't have expected structure
         console.log('DEBUG - Not a JSON-structured message, continuing with regular parsing');
       }
@@ -527,6 +544,20 @@ const ChatMessageList: React.FC<ChatMessageListProps> = ({
                 }
                 
                 handleCaseSelection(chat.id || '', newSelected);
+              }}
+              onSelectionChange={(selectedCaseIds) => {
+                // If we have case details for these IDs, convert IDs to full Case objects
+                if (chat.cases && selectedCaseIds.length > 0) {
+                  const selectedCases = chat.cases.filter(c => selectedCaseIds.includes(c.id));
+                  console.log('Selected case IDs from SearchWidget:', selectedCaseIds);
+                  console.log('Selected cases after filtering:', selectedCases);
+                  
+                  // Update the selection in the parent component
+                  handleCaseSelection(chat.id || '', selectedCases);
+                } else if (selectedCaseIds.length === 0) {
+                  // Clear selection
+                  handleCaseSelection(chat.id || '', []);
+                }
               }}
               disabled={!activeSearchWidgetIds.includes(chat.id || '')}
             />

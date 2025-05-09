@@ -38,15 +38,10 @@ if not all([PROJ, LOC, APP]):
 # Create session service
 svc = VertexAiSessionService(project=PROJ, location=LOC)
 
-# Import sub-agents
+# Import required tools and agents
 sys.path.append(str(Path(__file__).parent))
-try:
-    from agents.najir_expert_agent import najir_expert_agent
-    log.info("Imported najir_expert_agent")
-except ImportError as e:
-    log.warning(f"Failed to import najir_expert_agent: {e}")
-    najir_expert_agent = None
 
+# Import greeting and farewell agents (if needed)
 try:
     from agents.greeting_agent import greeting_agent
     log.info("Imported greeting_agent")
@@ -61,23 +56,7 @@ except ImportError as e:
     log.warning(f"Failed to import farewell_agent: {e}")
     farewell_agent = None
 
-# Import the multi_case_agent
-try:
-    from agents.multi_case_agent import multi_case_agent
-    log.info("Imported multi_case_agent")
-except ImportError as e:
-    log.warning(f"Failed to import multi_case_agent: {e}")
-    multi_case_agent = None
-
-# Import the selected_cases_agent
-try:
-    from agents.selected_cases_agent import selected_cases_agent
-    log.info("Imported selected_cases_agent")
-except ImportError as e:
-    log.warning(f"Failed to import selected_cases_agent: {e}")
-    selected_cases_agent = None
-
-# Import the case_details_agent
+# Import the case_details_agent (unified for all case detail requests)
 try:
     from agents.case_details_agent import case_details_agent
     log.info("Imported case_details_agent")
@@ -99,12 +78,6 @@ if greeting_agent:
     sub_agents.append(greeting_agent)
 if farewell_agent:
     sub_agents.append(farewell_agent)
-if najir_expert_agent:
-    sub_agents.append(najir_expert_agent)
-if multi_case_agent:
-    sub_agents.append(multi_case_agent)
-if selected_cases_agent:
-    sub_agents.append(selected_cases_agent)
 if case_details_agent:
     sub_agents.append(case_details_agent)
 
@@ -115,21 +88,28 @@ root_agent = Agent(
     instruction="""
     You are a helpful, concise assistant that handles legal queries about Nepali Supreme Court cases.
     
-    When a user asks a question, carefully analyze the request and route it to the appropriate specialist:
+    When a user asks a question, carefully analyze the request and route it appropriately:
     
     1. For GREETINGS (e.g., "Hello", "Hi") - respond in a friendly manner or delegate to greeting_agent
     2. For FAREWELLS (e.g., "Goodbye", "See you") - respond with a polite goodbye or delegate to farewell_agent
-    3. For CASE SEARCH requests (e.g., "Find cases about land dispute") - use the case_search_tool
-    4. For SINGLE CASE details (e.g., "Tell me about case 1234") - delegate to najir_expert_agent
-    5. For MULTIPLE CASE details (e.g., "Tell me about cases 1234, 5678") - delegate to multi_case_agent
-    6. For SELECTED CASES from the UI - ALWAYS delegate to selected_cases_agent
+    3. For CASE SEARCH requests - use the case_search_tool:
+       - When the user wants to find cases about a topic (e.g., "Find cases about land dispute", "Search for cases related to divorce")
+       - When the user is looking for cases matching certain criteria
+       - ANY request that asks to discover or find cases
+    4. For ALL CASE DETAIL requests - ALWAYS delegate to case_details_agent:
+       - Single case details (e.g., "Tell me about case 1234", "What is case 076-WO-0945 about?")
+       - Multiple case details (e.g., "Tell me about cases 1234, 5678", "Compare cases 1234 and 5678")
+       - Selected cases from UI (e.g., "Tell me about these selected cases", "Summarize these cases")
+       - ANYTHING related to getting information about specific cases
     
-    When the user mentions "selected cases", "these cases", or anything referring to cases they've selected in the UI,
-    ALWAYS delegate to the selected_cases_agent. This agent specializes in processing pre-selected cases from the search interface.
-    
-    When the user mentions multiple case numbers in their query, delegate to multi_case_agent.
+    IMPORTANT: For ANY request with selected cases from the UI, always delegate to case_details_agent.
+    The case_details_agent can handle both specific case IDs mentioned in the query AND selected case IDs.
     
     Be concise and helpful in your responses.
+    
+    WHEN DELEGATING:
+    - Use this format: [agent_name] Your response here
+    - Example: [case_details_agent] Tell me about these cases
     """,
     description="Root agent that handles legal queries with specialized tools",
     tools=[case_search_tool] if case_search_tool else [],
@@ -140,16 +120,10 @@ root_agent = Agent(
 root_runner = Runner(agent=root_agent, app_name=APP, session_service=svc)
 agent_runners = {}
 
-if najir_expert_agent:
-    agent_runners["najir_expert_agent"] = Runner(agent=najir_expert_agent, app_name=APP, session_service=svc)
 if greeting_agent:
     agent_runners["greeting_agent"] = Runner(agent=greeting_agent, app_name=APP, session_service=svc)
 if farewell_agent:
     agent_runners["farewell_agent"] = Runner(agent=farewell_agent, app_name=APP, session_service=svc)
-if multi_case_agent:
-    agent_runners["multi_case_agent"] = Runner(agent=multi_case_agent, app_name=APP, session_service=svc)
-if selected_cases_agent:
-    agent_runners["selected_cases_agent"] = Runner(agent=selected_cases_agent, app_name=APP, session_service=svc)
 if case_details_agent:
     agent_runners["case_details_agent"] = Runner(agent=case_details_agent, app_name=APP, session_service=svc)
 
@@ -159,32 +133,6 @@ for agent_name in agent_runners:
     log.info(f"  - {agent_name}")
 if case_search_tool:
     log.info("  - case_search_tool (used directly by root_agent)")
-
-# Add support for detecting multiple case number requests
-def contains_multiple_case_numbers(message: str) -> bool:
-    """
-    Check if the message contains multiple case numbers.
-    Examples: 
-    - "Tell me more about cases 1234, 5678, and 9876" 
-    - "Tell me more about these cases: 1234, 5678"
-    """
-    # Common patterns for multiple case requests
-    patterns = [
-        r"cases?.*?(\d+)[,\s]+(\d+)",  # "cases 1234, 5678" or "case 1234, 5678"
-        r"case.*?numbers?.*?(\d+)[,\s]+(\d+)",  # "case numbers 1234, 5678"
-        r"these.*?cases:?\s+(\d+)[,\s]+(\d+)"  # "these cases: 1234, 5678"
-    ]
-    
-    for pattern in patterns:
-        if re.search(pattern, message, re.IGNORECASE):
-            return True
-    
-    return False
-
-def extract_case_numbers(message: str) -> List[str]:
-    """Extract all case numbers from a message."""
-    # Find all numbers with reasonable length (3+ digits) to be case numbers
-    return re.findall(r'\b\d{3,}\b', message)
 
 def route_to_agent(user_id: str, session_id: str, message: str, selected_case_ids: list = None) -> str:
     """
@@ -201,45 +149,62 @@ def route_to_agent(user_id: str, session_id: str, message: str, selected_case_id
     """
     # Log selected case IDs if available
     if selected_case_ids and len(selected_case_ids) > 0:
-        log.info(f"route_to_agent called with {len(selected_case_ids)} selected case IDs: {selected_case_ids}")
-    else:
-        log.info("route_to_agent called without selected case IDs")
-    
-    # Check if it's a request about selected cases
-    selected_case_keywords = [
-        "selected cases", "these cases", "those cases", "the cases i selected", 
-        "the selected cases", "the cases i chose", "the cases i've selected",
-        "the cases i have selected"
-    ]
-    
-    is_selected_cases_request = any(keyword.lower() in message.lower() for keyword in selected_case_keywords)
-    
-    # If the user is asking about selected cases AND we have selected_case_ids, handle directly
-    if is_selected_cases_request:
-        if selected_case_ids and len(selected_case_ids) > 0:
-            log.info(f"Detected request about selected cases with {len(selected_case_ids)} case IDs")
+        log.info(f"===== ROUTE TO AGENT: SELECTED CASES =====")
+        log.info(f"route_to_agent received {len(selected_case_ids)} selected case IDs:")
+        for i, case_id in enumerate(selected_case_ids):
+            log.info(f"  {i+1}. Case ID: {case_id}")
+        log.info(f"=========================================")
+        
+        # If user has selected cases, force delegation to case_details_agent regardless of message
+        # This is a key improvement - ensuring selected cases are always handled by case_details_agent
+        message_with_ids = message
+        if not any(phrase in message.lower() for phrase in ["selected cases", "these cases"]):
+            # Format the selected case IDs as a JSON array string for better parsing
+            case_ids_json = json.dumps(selected_case_ids)
+            message_with_ids = f"{message} (Selected case IDs: {case_ids_json})"
+            log.info(f"Modified message with selected case IDs: {message_with_ids}")
+        
+        if case_details_agent and "case_details_agent" in agent_runners:
+            log.info(f"Directly delegating to case_details_agent due to selected_case_ids")
             try:
-                # Import the process_selected_cases tool
-                from agents.selected_cases_agent import process_selected_cases
-                
-                # Call the tool directly
-                result = process_selected_cases(
-                    question=message,
-                    case_ids=selected_case_ids
+                # Prepare user content for agent, explicitly including selected case IDs
+                content = types.Content(
+                    role="user", 
+                    parts=[types.Part(text=message_with_ids)]
                 )
                 
-                if result:
-                    log.info(f"Successfully processed {len(selected_case_ids)} selected cases")
-                    return result
-                else:
-                    log.warning("No result from process_selected_cases call")
-                    # Continue with normal flow if direct handling fails
+                # Get the response from the case details agent
+                agent_runner = agent_runners["case_details_agent"]
+                agent_response = ""
+                
+                for ev in agent_runner.run(user_id=user_id, session_id=session_id, new_message=content):
+                    if ev.is_final_response() and ev.content and ev.content.parts:
+                        agent_response = ev.content.parts[0].text
+                        break
+                
+                log.info(f"Got response from case_details_agent of length: {len(agent_response)}")
+                if "I couldn't find any case IDs" in agent_response:
+                    log.warning(f"case_details_agent failed to extract case IDs despite being provided: {selected_case_ids}")
+                    
+                    # As a fallback, directly pass the case IDs to the case_details_tool
+                    try:
+                        from tools.case_details_tool import case_details_tool
+                        log.info(f"Attempting direct call to case_details_tool with case_ids={selected_case_ids}")
+                        direct_response = case_details_tool(
+                            question=message,
+                            case_ids=selected_case_ids
+                        )
+                        log.info(f"Direct case_details_tool response length: {len(direct_response)}")
+                        return direct_response
+                    except Exception as tool_error:
+                        log.exception(f"Error calling case_details_tool directly: {tool_error}")
+                
+                return agent_response
             except Exception as e:
-                log.exception(f"Error in selected cases processing: {e}")
-                # Continue with normal flow if direct handling fails
-        else:
-            log.info("User asked about selected cases but no cases were selected")
-            return "I don't see any selected cases. Please select cases from the search results first, and then I can provide information about them."
+                log.exception(f"Error delegating to case_details_agent: {e}")
+                return f"I apologize, but I'm having trouble retrieving case details. Please try again."
+    else:
+        log.info("route_to_agent called without selected case IDs")
     
     # Check if it's a case search query
     case_search_keywords = [
@@ -250,6 +215,7 @@ def route_to_agent(user_id: str, session_id: str, message: str, selected_case_id
     
     is_case_search = any(keyword.lower() in message.lower() for keyword in case_search_keywords)
     
+    # Handle case search directly with case_search_tool
     if is_case_search and case_search_tool:
         log.info("Detected case search query, using case_search_tool directly")
         try:
@@ -279,10 +245,6 @@ def route_to_agent(user_id: str, session_id: str, message: str, selected_case_id
                 "data": search_results
             }
             
-            # Log the response structure for debugging
-            log.info(f"Structured response type: {frontend_response['type']}")
-            log.info(f"Structured response has {len(frontend_response['data'].get('cases', []))} cases")
-            
             # Return the formatted JSON response
             json_response = json.dumps(frontend_response, ensure_ascii=False)
             log.info(f"Returning JSON response of length: {len(json_response)}")
@@ -291,10 +253,12 @@ def route_to_agent(user_id: str, session_id: str, message: str, selected_case_id
             log.exception(f"Error using case_search_tool directly: {e}")
             return f"I apologize, but I'm having trouble searching for cases. Please try again."
     
-    # For non-case search queries, use the normal agent routing
+    # For all other queries, get routing decision from root agent
+    # Prepare user content for agent
     content = types.Content(role="user", parts=[types.Part(text=message)])
-    routing_decision = ""
     
+    # Get the routing decision from the root agent
+    routing_decision = ""
     try:
         for ev in root_runner.run(user_id=user_id, session_id=session_id, new_message=content):
             if ev.is_final_response() and ev.content and ev.content.parts:
@@ -313,137 +277,22 @@ def route_to_agent(user_id: str, session_id: str, message: str, selected_case_id
     if not agent_match:
         log.warning(f"Root agent didn't specify an agent in the correct format: {routing_decision[:100]}...")
         
-        # Check if this is a response from multi_case_agent that got passed through
-        if "Case " in routing_decision and "Title: " in routing_decision:
-            log.info("Detected multi_case_agent response format, passing through")
-            return routing_decision
-        
         # If no agent tag is found, assume the root agent is handling it directly
         return routing_decision
     
     agent_name = agent_match.group(1)
     log.info(f"Root agent selected: {agent_name}")
     
-    # Special handling for case_details_agent with selected case IDs
-    if agent_name == "case_details_agent" and selected_case_ids and len(selected_case_ids) > 0:
-        log.info(f"Handling case details directly with {len(selected_case_ids)} selected case IDs")
-        try:
-            # Import the case_details_tool directly
-            from agents.case_details_agent import case_details_tool
-            
-            # Call the tool directly with the selected case IDs
-            result = case_details_tool(
-                question="Provide detailed information about these cases",
-                case_ids=selected_case_ids
-            )
-            
-            if result:
-                log.info(f"Successfully processed case details for {len(selected_case_ids)} cases")
-                return result
-            else:
-                log.warning("No result from direct case_details_tool call")
-                
-        except Exception as e:
-            log.exception(f"Error calling case_details_tool directly: {e}")
-            # Fall back to regular agent delegation below
-    
-    # Special handling for case_search_agent - use direct case_search_tool instead
-    if agent_name == "case_search_agent" and case_search_tool:
-        log.info("Redirecting case_search_agent request to direct case_search_tool")
-        try:
-            # Use the case_search_tool directly with the query
-            search_results = case_search_tool(query=message)
-            
-            # Extract the search query for better UI experience
-            query_match = None
-            for keyword in case_search_keywords:
-                if keyword.lower() in message.lower():
-                    # Try to extract what comes after the keyword
-                    pattern = re.compile(f"{re.escape(keyword)}\\s+(.*?)(?:$|\\.|\\?)", re.IGNORECASE)
-                    match = pattern.search(message)
-                    if match:
-                        query_match = match.group(1).strip()
-                        break
-            
-            # Add the query to the results
-            if query_match:
-                search_results["query"] = query_match
-            
-            # Format the response for the frontend
-            frontend_response = {
-                "type": "CASE_SEARCH_RESULTS",
-                "text": "Here are the cases related to your search:",
-                "data": search_results
-            }
-            
-            # Return the formatted JSON response
-            json_response = json.dumps(frontend_response, ensure_ascii=False)
-            return json_response
-        except Exception as e:
-            log.exception(f"Error using case_search_tool directly: {e}")
-            return f"I apologize, but I'm having trouble searching for cases. Please try again."
-    
     # If the root agent decided to handle it directly
     if agent_name == "root_agent":
-        # For root agent, generate a direct response
-        try:
-            direct_content = types.Content(role="user", parts=[types.Part(text=f"Please answer this question directly: {message}")])
-            direct_response = ""
-            for ev in root_runner.run(user_id=user_id, session_id=session_id, new_message=direct_content):
-                if ev.is_final_response() and ev.content and ev.content.parts:
-                    direct_response = ev.content.parts[0].text
-                    break
-            if direct_response:
-                # Remove any agent tags from the direct response
-                direct_response = re.sub(r'^\[.*?\]\s*', '', direct_response)
-                return direct_response
-        except Exception as e:
-            log.exception(f"Error getting direct response from root agent: {e}")
-        
-        # Fallback generic response
-        return "I'll do my best to help you with that."
+        # For root agent, return the response without the tag
+        direct_response = re.sub(r'^\[.*?\]\s*', '', routing_decision)
+        return direct_response
     
     # Check if the selected agent exists
     if agent_name not in agent_runners:
         log.warning(f"Selected agent {agent_name} not available")
-        
-        # For missing case_search_agent, use direct case_search_tool if available
-        if agent_name == "case_search_agent" and case_search_tool:
-            log.info("Redirecting to direct case_search_tool")
-            return route_to_agent(user_id, session_id, f"Search for cases about: {message}")
-        
-        # For missing najir_expert_agent, provide a helpful response
-        if agent_name == "najir_expert_agent":
-            return f"I'd like to help you with your legal question about Nepali Supreme Court cases, but that functionality is currently unavailable. Please try a different query or check back later."
-        
-        # For other missing agents, provide a generic response
         return f"I apologize, but I'm having trouble processing your request. Please try again."
-    
-    # Special handling for selected_cases_agent when we have selected_case_ids
-    if agent_name == "selected_cases_agent":
-        if selected_case_ids and len(selected_case_ids) > 0:
-            log.info(f"Handling selected cases directly with {len(selected_case_ids)} case IDs")
-            try:
-                # Import the process_selected_cases tool
-                from agents.selected_cases_agent import process_selected_cases
-                
-                # Call the tool directly
-                result = process_selected_cases(
-                    question=message,
-                    case_ids=selected_case_ids
-                )
-                
-                if result:
-                    log.info(f"Successfully processed {len(selected_case_ids)} selected cases")
-                    return result
-                else:
-                    log.warning("No result from process_selected_cases call")
-            except Exception as e:
-                log.exception(f"Error calling process_selected_cases directly: {e}")
-                # Fall back to regular agent delegation
-        else:
-            log.info("Agent selected_cases_agent but no case IDs were provided")
-            return "I don't see any selected cases. Please select cases from the search results first, and then I can provide information about them."
     
     # Route the query to the selected agent
     agent_runner = agent_runners[agent_name]

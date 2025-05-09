@@ -236,7 +236,31 @@ export default function ChatPage() {
         console.log('Selected cases IDs:', requestBody.selectedCaseIds);
         console.log('Selected cases data:', JSON.stringify(messageWithSelectedCases.selectedCases));
         console.log('User query:', clean);
+        
+        // Add more detailed logging with case titles
+        if (messageWithSelectedCases.selectedCases.length > 0) {
+          console.log('Selected case details:');
+          messageWithSelectedCases.selectedCases.forEach((c, i) => {
+            console.log(`${i+1}. ID: ${c.id}, Title: ${c.title}`);
+          });
+        }
         console.log('==================================')
+      } else {
+        console.log('====== NO SELECTED CASES ======');
+        console.log('No selected cases found in recent messages');
+        console.log('Total messages:', messages.length);
+        // Log the last 3 messages to help debug
+        const lastMessages = messages.slice(-3);
+        console.log('Last 3 messages:');
+        lastMessages.forEach((msg, i) => {
+          console.log(`Message ${i+1}:`, {
+            id: msg.id,
+            sender: msg.sender,
+            hasSelectedCases: !!msg.selectedCases,
+            selectedCount: msg.selectedCases?.length || 0
+          });
+        });
+        console.log('==============================')
       }
 
       // Send the request to the backend
